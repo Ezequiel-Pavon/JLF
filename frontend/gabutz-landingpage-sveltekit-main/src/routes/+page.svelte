@@ -32,7 +32,7 @@
 				</p>
 			</div>
 			<div class="col-lg-6 col-md-6 col-12">
-				<img src="/img/hero.svg" alt="Hero" />
+				<img src="/img/about.jpg" alt="Hero" class="hero-img img-fluid"/>
 			</div>
 		</div>
 	</div>
@@ -96,79 +96,53 @@
 
 <!-- Start Services -->
 <Section
-	title="Services"
-	description="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Soluta, sequi odio esse officia
-					repellendus animi ab harum quasi qui at."
-	classId="service"
+  title="Servicios"
+  classId="service"
 >
-	<div class="row">
-		<div class="col-lg-4 col-md-12 col-12">
-			<div class="card">
-				<div class="card-body">
-					<div class="logo">
-						<i class="bi bi-filetype-html"></i>
-					</div>
-					<div class="content">
-						<h3>Web Design</h3>
-						<p>
-							Lorem ipsum dolor, sit amet consectetur adipisicing elit. Doloribus nostrum dolores
-							fugiat, consectetur nisi ut!
-						</p>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="col-lg-4 col-md-12 col-12">
-			<div class="card">
-				<div class="card-body">
-					<div class="logo">
-						<i class="bi bi-display"></i>
-					</div>
-					<div class="content">
-						<h3>Digital Marketing</h3>
-						<p>
-							Lorem ipsum dolor, sit amet consectetur adipisicing elit. Doloribus nostrum dolores
-							fugiat, consectetur nisi ut!
-						</p>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="col-lg-4 col-md-12 col-12">
-			<div class="card">
-				<div class="card-body">
-					<div class="logo">
-						<i class="bi bi-code-slash"></i>
-					</div>
-					<div class="content">
-						<h3>Web Development</h3>
-						<p>
-							Lorem ipsum dolor, sit amet consectetur adipisicing elit. Doloribus nostrum dolores
-							fugiat, consectetur nisi ut!
-						</p>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="col-lg-4 col-md-12 col-12">
-			<div class="card">
-				<div class="card-body">
-					<div class="logo">
-						<i class="bi bi-code-slash"></i>
-					</div>
-					<div class="content">
-						<h3>Web Development</h3>
-						<p>
-							Lorem ipsum dolor, sit amet consectetur adipisicing elit. Doloribus nostrum dolores
-							fugiat, consectetur nisi ut!
-						</p>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+  <div class="row">
+    <!-- Card 1: Tableros-->
+    <div class="col-lg-6 col-md-6 col-12">
+      <a href="/services/web-design" class="card service-card">
+        <img src="/img/servicios/tablero.jpg" alt="tableros" class="card-img-top" />
+        <div class="card-body text-center">
+          <h3 class="card-title">Tableros</h3>
+        </div>
+      </a>
+    </div>
+
+    <!-- Card 2: Obras-->
+    <div class="col-lg-6 col-md-6 col-12">
+      <a href="/services/digital-marketing" class="card service-card">
+        <img src="/img/servicios/obras.jpg" alt="obras" class="card-img-top" />
+        <div class="card-body text-center">
+          <h3 class="card-title">Obras</h3>
+        </div>
+      </a>
+    </div>
+
+    <!-- Card 3: Automatizacion -->
+    <div class="col-lg-6 col-md-6 col-12">
+      <a href="/services/web-development" class="card service-card">
+        <img src="/img/servicios/automatizacion.jpg" alt="Web Development" class="card-img-top" />
+        <div class="card-body text-center">
+          <h3 class="card-title">Automatizacion</h3>
+        </div>
+      </a>
+    </div>
+
+    <!-- Card 4: industria -->
+    <div class="col-lg-6 col-md-6 col-12">
+      <a href="/services/analytics" class="card service-card">
+        <img src="/img/servicios/PLANTA-METALMECANICA.jpg" alt="Analytics" class="card-img-top" />
+        <div class="card-body text-center">
+          <h3 class="card-title">Industria 4.0</h3>
+        </div>
+      </a>
+    </div>
+  </div>
 </Section>
 <!-- End Services -->
+
 
 <!-- Start Brands Carousel -->
 <Section
@@ -190,125 +164,114 @@
 
 <!-- Start Portfolio -->
 <Section
-	title="Portfolio"
-	description="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Soluta, sequi odio esse officia
-					repellendus animi ab harum quasi qui at."
-	classId="portfolio"
+  title="Nuestros Productos"
+  description="Algunos de los productos destacados de nuestra empresa"
+  classId="portfolio"
 >
-	<div class="row">
-		<div class="col-lg-4 col-md-6 col-12">
-			<div class="card">
-				<div class="card-body">
-					<img src="https://source.unsplash.com/1600x900/?beach" alt="Product" />
-					<h3>Product 1</h3>
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quasi, pariatur!</p>
-					<a class="btn btn-primary" href="/">Detail <i class="bi bi-arrow-right-short"></i></a>
-				</div>
-			</div>
-		</div>
-		<div class="col-lg-4 col-md-6 col-12">
-			<div class="card">
-				<div class="card-body">
-					<img src="https://source.unsplash.com/1600x900/?village" alt="Product" />
-					<h3>Product 2</h3>
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quasi, pariatur!</p>
-					<a class="btn btn-primary" href="/">Detail <i class="bi bi-arrow-right-short"></i></a>
-				</div>
-			</div>
-		</div>
-		<div class="col-lg-4 col-md-6 col-12">
-			<div class="card">
-				<div class="card-body">
-					<img src="https://source.unsplash.com/1600x900/?city" alt="Product" />
-					<h3>Product 3</h3>
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quasi, pariatur!</p>
-					<a class="btn btn-primary" href="/">Detail <i class="bi bi-arrow-right-short"></i></a>
-				</div>
-			</div>
-		</div>
-		<div class="col-lg-4 col-md-6 col-12">
-			<div class="card">
-				<div class="card-body">
-					<img src="https://source.unsplash.com/1600x900/?sea" alt="Product" />
-					<h3>Product 4</h3>
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quasi, pariatur!</p>
-					<a class="btn btn-primary" href="/">Detail <i class="bi bi-arrow-right-short"></i></a>
-				</div>
-			</div>
-		</div>
-		<div class="col-lg-4 col-md-6 col-12">
-			<div class="card">
-				<div class="card-body">
-					<img src="https://source.unsplash.com/1600x900/?montain" alt="Product" />
-					<h3>Product 5</h3>
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quasi, pariatur!</p>
-					<a class="btn btn-primary" href="/">Detail <i class="bi bi-arrow-right-short"></i></a>
-				</div>
-			</div>
-		</div>
-		<div class="col-lg-4 col-md-6 col-12">
-			<div class="card">
-				<div class="card-body">
-					<img src="https://source.unsplash.com/1600x900/?sport" alt="Product" />
-					<h3>Product 6</h3>
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quasi, pariatur!</p>
-					<a class="btn btn-primary" href="/">Detail <i class="bi bi-arrow-right-short"></i></a>
-				</div>
-			</div>
-		</div>
-	</div>
+  <div class="row">
+    <!-- Producto 1 -->
+    <div class="col-lg-4 col-md-6 col-12">
+      <div class="card portfolio-card">
+        <img
+          src="/img/productos/controladores.webp"
+          alt="Producto Uno"
+          class="card-img-top"
+        />
+        <div class="card-body text-center">
+          <h3 class="card-title">Producto Uno</h3>
+          <a href="/productos/producto-uno" class="btn btn-primary">
+            Detalle <i class="bi bi-arrow-right-short"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Producto 2 -->
+    <div class="col-lg-4 col-md-6 col-12">
+      <div class="card portfolio-card">
+        <img
+          src="/img/productos/motor.webp"
+          alt="Producto Dos"
+          class="card-img-top"
+        />
+        <div class="card-body text-center">
+          <h3 class="card-title">Producto Dos</h3>
+          <a href="/products/producto-dos" class="btn btn-primary">
+            Detalle <i class="bi bi-arrow-right-short"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Producto 3 -->
+    <div class="col-lg-4 col-md-6 col-12">
+      <div class="card portfolio-card">
+        <img
+          src="/img/productos/panelElectrico.webp"
+          alt="Producto Tres"
+          class="card-img-top"
+        />
+        <div class="card-body text-center">
+          <h3 class="card-title">Producto Tres</h3>
+          <a href="/products/producto-tres" class="btn btn-primary">
+            Detalle <i class="bi bi-arrow-right-short"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Puedes agregar más productos siguiendo la misma estructura -->
+  </div>
 </Section>
 <!-- End Portfolio -->
 
 <!-- Start Contact -->
 <Section
-	title="Contact US"
-	description="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Soluta, sequi odio esse officia
-					repellendus animi ab harum quasi qui at."
-	classId="contact"
+  title="Contáctanos"
+  classId="contact"
 >
-	<div class="row">
-		<div class="col-lg-7 col-md-6 col-12">
-			<iframe
-				src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3966.2281264770972!2d106.86705291468587!3d-6.233630295487661!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f3d4363de54f%3A0x343f089e4c9d5b3b!2sKos%20Ibu%20Suryadi!5e0!3m2!1sen!2sid!4v1671606082515!5m2!1sen!2sid"
-				allowfullscreen={true}
-				loading="lazy"
-				referrerpolicy="no-referrer-when-downgrade"
-				title="Google Maps"
-			></iframe>
-		</div>
-		<div class="col-lg-5 col-md-6 col-12">
-			<div class="card">
-				<div class="card-body">
-					<div class="content">
-						<i class="bi bi-geo-alt"></i>
-						<div class="info">
-							<h3>Address</h3>
-							<p>
-								Jl. Ayub No.31, RT.16/RW.8, Bidara Cina, Kecamatan Jatinegara, Kota Jakarta Timur,
-								Daerah Khusus Ibukota Jakarta 13330
-							</p>
-						</div>
-					</div>
-					<hr class="hr-dotted" />
-					<div class="content">
-						<i class="bi bi-envelope"></i>
-						<div class="info">
-							<h3>Email</h3>
-							<p>example@gmail.com</p>
-						</div>
-					</div>
-					<hr class="hr-dotted" />
-					<div class="content">
-						<i class="bi bi-telephone"></i>
-						<div class="info">
-							<h3>Phone</h3>
-							<p>(021)1234567</p>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+  <div class="row">
+    <div class="col-lg-7 col-md-6 col-12">
+      <iframe
+        src="https://www.google.com/maps?q=Av.+Calchaqu%C3%AD+4230,+B1878+Quilmes+Oeste,+Provincia+de+Buenos+Aires,+Argentina&output=embed"
+        allowfullscreen
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+        title="Google Maps - Av. Calchaquí 4230"
+        style="width:100%; height:400px; border:0;"
+      ></iframe>
+    </div>
+    <div class="col-lg-5 col-md-6 col-12">
+      <div class="card">
+        <div class="card-body">
+          <div class="content">
+            <i class="bi bi-geo-alt"></i>
+            <div class="info">
+              <h3>Dirección</h3>
+              <p>
+                Av. Calchaquí 4230, B1878 Quilmes Oeste, Provincia de Buenos Aires, Argentina
+              </p>
+            </div>
+          </div>
+          <hr class="hr-dotted" />
+          <div class="content">
+            <i class="bi bi-envelope"></i>
+            <div class="info">
+              <h3>Mail</h3>
+              <p>info@electrojlf.com.ar</p>
+            </div>
+          </div>
+          <hr class="hr-dotted" />
+          <div class="content">
+            <i class="bi bi-telephone"></i>
+            <div class="info">
+              <h3>Teléfono</h3>
+              <p>(011) 5353-9408</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </Section>
 <!-- End Contact -->

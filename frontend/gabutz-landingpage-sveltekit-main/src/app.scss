@@ -41,8 +41,8 @@
 $bg:#eff0f3;
 $white:#fffffe;
 $gray:#eff0f3;
-$primary:#ff8e3c;
-$primary_hover:#e58037;
+$primary:#fd3333;
+$primary_hover:#756bf8;
 $dark:#0d0d0d;
 $dark_text:#2a2a2a;
 
@@ -103,6 +103,24 @@ body {
     span {
         color: $primary;
     }
+    .hero-img {
+        max-height: 500px;       // ajusta a tu gusto (200–300px suele funcionar)
+        width: auto;
+        display: block;
+        margin: 0 auto;         // centra la imagen si quieres
+    }
+
+    @media (max-width: 992px) {
+        .hero-img {
+        max-height: 200px;     // más pequeño en pantallas medianas
+        }
+    }
+
+    @media (max-width: 576px) {
+        .hero-img {
+        max-height: 150px;     // aún más pequeño en móviles
+        }
+    }
 }
 
 
@@ -157,76 +175,64 @@ section {
 
 // Service
 .service {
-    .section_description {
-        color: $dark_text;
+  .service-card {
+    text-decoration: none;
+    color: inherit;
+    transition: transform .3s ease;
+
+    &:hover {
+      transform: translateY(-6px);
     }
 
-    .card {
-        text-align: -webkit-center;
-        border-radius: 10px;
-        transition: all .5s ease-in-out;
-        margin-bottom: 1rem;
-
-        h3 {
-            font-size: 1.4rem;
-            margin-bottom: 0;
-            font-weight: 600;
-        }
-
-        p {
-            margin-bottom: 0;
-        }
-
-        .logo {
-            background: $primary;
-            width: 80px;
-            padding: .7rem;
-            border-radius: 50%;
-            margin-bottom: 1rem;
-
-            i {
-                color: $white;
-                font-size: 2.3rem;
-            }
-        }
-
-        &:hover {
-            background: $primary;
-            color: $white;
-            cursor: pointer;
-
-            .logo {
-                background: $white;
-
-                i {
-                    color: $primary;
-                }
-            }
-        }
+    .card-img-top {
+      width: 100%;
+      border-top-left-radius: 10px;
+      border-top-right-radius: 10px;
+      object-fit: cover;
+      height: 180px; // ajusta según tu diseño
     }
+
+    .card-body {
+      padding: 1rem;
+    }
+
+    .card-title {
+      margin: 0;
+      font-size: 1.4rem;
+      font-weight: 600;
+    }
+  }
 }
 
 // Portfolio
 .portfolio {
-    .section_description {
-        color: $dark_text;
+  .portfolio-card {
+    border-radius: 10px;
+    transition: transform .3s ease;
+    margin-bottom: 1.5rem;
+
+    &:hover {
+      transform: translateY(-6px);
     }
 
-    .card {
-        margin-bottom: 1rem;
-        border-radius: 10px;
-
-        img {
-            width: 100%;
-            border-radius: 10px;
-            margin-bottom: 1rem;
-        }
-
-        h3 {
-            font-size: 1.3rem;
-            font-weight: 600;
-        }
+    .card-img-top {
+      width: 100%;
+      height: 200px;       // ajusta a tu gusto
+      object-fit: cover;
+      border-top-left-radius: 10px;
+      border-top-right-radius: 10px;
     }
+
+    .card-body {
+      padding: 1rem;
+    }
+
+    .card-title {
+      font-size: 1.3rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+  }
 }
 
 // Contact
