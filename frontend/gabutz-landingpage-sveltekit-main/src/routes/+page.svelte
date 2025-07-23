@@ -2,15 +2,21 @@
 	import Section from '$lib/components/Section.svelte';
 
 	const brands = [
-		'https://upload.wikimedia.org/wikipedia/commons/2/20/Adidas_Logo.svg',
-		'https://upload.wikimedia.org/wikipedia/commons/2/20/Adidas_Logo.svg',
-		'https://upload.wikimedia.org/wikipedia/commons/2/20/Adidas_Logo.svg',
-		'https://upload.wikimedia.org/wikipedia/commons/2/20/Adidas_Logo.svg',
-		'https://upload.wikimedia.org/wikipedia/commons/2/20/Adidas_Logo.svg',
-		'https://upload.wikimedia.org/wikipedia/commons/2/20/Adidas_Logo.svg',
-		'https://upload.wikimedia.org/wikipedia/commons/2/20/Adidas_Logo.svg',
-		'https://upload.wikimedia.org/wikipedia/commons/2/20/Adidas_Logo.svg',
-		'https://upload.wikimedia.org/wikipedia/commons/2/20/Adidas_Logo.svg',
+		'/img/img-jlf/Proveedores/chint-logo.png',
+		'/img/img-jlf/Proveedores/ducati-energia.png',
+		'/img/img-jlf/Proveedores/elibet-logo.png',
+		'/img/img-jlf/Proveedores/genrod-logo.jpg',
+		'/img/img-jlf/Proveedores/Interlec-logo.svg',
+		'/img/img-jlf/Proveedores/kalop-logo.webp',
+		'/img/img-jlf/Proveedores/logo_lamy.png',
+		'/img/img-jlf/Proveedores/macroled-icon.png',
+		'/img/img-jlf/Proveedores/microcontrol-logo.png',
+		'/img/img-jlf/Proveedores/neutroluz-logo.png',
+		'/img/img-jlf/Proveedores/nian-logo.svg',
+		'/img/img-jlf/Proveedores/RBCsitel-logo.png',
+		'/img/img-jlf/Proveedores/samet-logo.png',
+		'/img/img-jlf/Proveedores/schneider-logo.png',
+		'/img/img-jlf/Proveedores/weg-logo.webp',
 		];
 </script>
 
@@ -154,15 +160,15 @@
   description="Algunas de las marcas que confían en nosotros"
   classId="brands"
 >
-  <div class="marquee-wrapper">
-    <div class="marquee-track">
-      {#each [...brands, ...brands] as src}
-        <div class="marquee-item">
-          <img src={src} alt="Logo marca" class="img-fluid" />
-        </div>
-      {/each}
-    </div>
-  </div>
+	<div class="marquee-wrapper">
+		<div class="marquee-track">
+			{#each [...brands, ...brands] as src}
+			<div class="marquee-item">
+				<img src={src} alt="Logo marca" class="img-fluid" />
+			</div>
+			{/each}
+		</div>
+	</div>
 </Section>
 <!-- End Brands Carousel -->
 
