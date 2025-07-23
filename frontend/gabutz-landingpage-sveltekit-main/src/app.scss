@@ -336,3 +336,40 @@ section {
         color: $white;
     }
 }
+
+/* Marquee infinito para logos */
+.brands {
+  .marquee-wrapper {
+    overflow: hidden;
+    /* opcional padding vertical */
+    padding: 1.5rem 0;
+  }
+
+  .marquee-track {
+    display: flex;
+    width: calc(2 * 100%); /* porque duplicamos logos */
+    animation: marquee 20s linear infinite;
+  }
+
+  .marquee-item {
+    flex: 0 0 auto;
+    margin: 0 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .marquee-item img {
+    max-height: 60px;
+  }
+}
+
+/* Definición de la animación */
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}

@@ -1,5 +1,17 @@
 <script>
 	import Section from '$lib/components/Section.svelte';
+
+	const brands = [
+		'https://upload.wikimedia.org/wikipedia/commons/2/20/Adidas_Logo.svg',
+		'https://upload.wikimedia.org/wikipedia/commons/2/20/Adidas_Logo.svg',
+		'https://upload.wikimedia.org/wikipedia/commons/2/20/Adidas_Logo.svg',
+		'https://upload.wikimedia.org/wikipedia/commons/2/20/Adidas_Logo.svg',
+		'https://upload.wikimedia.org/wikipedia/commons/2/20/Adidas_Logo.svg',
+		'https://upload.wikimedia.org/wikipedia/commons/2/20/Adidas_Logo.svg',
+		'https://upload.wikimedia.org/wikipedia/commons/2/20/Adidas_Logo.svg',
+		'https://upload.wikimedia.org/wikipedia/commons/2/20/Adidas_Logo.svg',
+		'https://upload.wikimedia.org/wikipedia/commons/2/20/Adidas_Logo.svg',
+		];
 </script>
 
 <!-- Start Header -->
@@ -135,6 +147,24 @@
 	</div>
 </Section>
 <!-- End Services -->
+
+<!-- Start Brands Carousel -->
+<Section
+  title="Nuestros Aliados"
+  description="Algunas de las marcas que confían en nosotros"
+  classId="brands"
+>
+  <div class="marquee-wrapper">
+    <div class="marquee-track">
+      {#each [...brands, ...brands] as src}
+        <div class="marquee-item">
+          <img src={src} alt="Logo marca" class="img-fluid" />
+        </div>
+      {/each}
+    </div>
+  </div>
+</Section>
+<!-- End Brands Carousel -->
 
 <!-- Start Portfolio -->
 <Section

@@ -4,6 +4,7 @@
 	import BackToTop from '$lib/components/BackToTop.svelte';
 	import Footer from '$lib/components/Footer.svelte';
 	import Navbar from '$lib/components/Navbar.svelte';
+	import '@splidejs/splide/dist/css/splide.min.css';
 	import '../app.scss';
 
 	onMount(async () => {
