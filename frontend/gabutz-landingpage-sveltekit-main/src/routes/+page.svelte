@@ -150,6 +150,22 @@
 				</div>
 			</div>
 		</div>
+		<div class="col-lg-4 col-md-12 col-12">
+			<div class="card">
+				<div class="card-body">
+					<div class="logo">
+						<i class="bi bi-code-slash"></i>
+					</div>
+					<div class="content">
+						<h3>Web Development</h3>
+						<p>
+							Lorem ipsum dolor, sit amet consectetur adipisicing elit. Doloribus nostrum dolores
+							fugiat, consectetur nisi ut!
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
 </Section>
 <!-- End Services -->
