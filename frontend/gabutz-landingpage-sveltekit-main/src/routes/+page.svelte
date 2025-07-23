@@ -1,5 +1,7 @@
 <script>
 	import Section from '$lib/components/Section.svelte';
+	import MarqueeExample from '$lib/components/MarqueeExample.svelte';
+  import { services } from './services/data.js';
 
 	const brands = [
 		'/img/img-jlf/Proveedores/chint-logo.png',
@@ -100,48 +102,27 @@
   classId="service"
 >
   <div class="row">
-    <!-- Card 1: Tableros-->
-    <div class="col-lg-6 col-md-6 col-12">
-      <a href="/services/web-design" class="card service-card">
-        <img src="/img/servicios/tablero.jpg" alt="tableros" class="card-img-top" />
-        <div class="card-body text-center">
-          <h3 class="card-title">Tableros</h3>
+    {#each services as service}
+      <div class="col-lg-6 col-md-6 col-12 mb-4">
+        <div class="card service-card h-100">
+          <!-- Imagen clickeable que lleva al detalle -->
+          <a href={`/services/${service.slug}`} style="display: block;">
+            <img
+              src={service.images[0]}
+              alt={service.title}
+              class="card-img-top"
+            />
+          </a>
+          <div class="card-body text-center">
+            <h3 class="card-title">{service.title}</h3>
+          </div>
         </div>
-      </a>
-    </div>
-
-    <!-- Card 2: Obras-->
-    <div class="col-lg-6 col-md-6 col-12">
-      <a href="/services/digital-marketing" class="card service-card">
-        <img src="/img/servicios/obras.jpg" alt="obras" class="card-img-top" />
-        <div class="card-body text-center">
-          <h3 class="card-title">Obras</h3>
-        </div>
-      </a>
-    </div>
-
-    <!-- Card 3: Automatizacion -->
-    <div class="col-lg-6 col-md-6 col-12">
-      <a href="/services/web-development" class="card service-card">
-        <img src="/img/servicios/automatizacion.jpg" alt="Web Development" class="card-img-top" />
-        <div class="card-body text-center">
-          <h3 class="card-title">Automatizacion</h3>
-        </div>
-      </a>
-    </div>
-
-    <!-- Card 4: industria -->
-    <div class="col-lg-6 col-md-6 col-12">
-      <a href="/services/analytics" class="card service-card">
-        <img src="/img/servicios/PLANTA-METALMECANICA.jpg" alt="Analytics" class="card-img-top" />
-        <div class="card-body text-center">
-          <h3 class="card-title">Industria 4.0</h3>
-        </div>
-      </a>
-    </div>
+      </div>
+    {/each}
   </div>
 </Section>
 <!-- End Services -->
+
 
 
 <!-- Start Brands Carousel -->
@@ -219,11 +200,19 @@
         </div>
       </div>
     </div>
-
-    <!-- Puedes agregar más productos siguiendo la misma estructura -->
   </div>
 </Section>
 <!-- End Portfolio -->
+
+<!-- Start Testimonials -->
+<Section
+  title="Lo que dicen nuestros empleados"
+  description="Historias reales de quienes forman parte del equipo"
+  classId="testimonials"
+>
+  <MarqueeExample />
+</Section>
+<!-- End Testimonials -->
 
 <!-- Start Contact -->
 <Section
