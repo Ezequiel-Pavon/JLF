@@ -2,6 +2,7 @@
 	import Section from '$lib/components/Section.svelte';
 	import MarqueeExample from '$lib/components/MarqueeExample.svelte';
   import { services } from '../lib/data/services.js';
+  import { products } from '$lib/data/products.js';
 
 	const brands = [
 		'/img/img-jlf/Proveedores/chint-logo.png',
@@ -20,6 +21,8 @@
 		'/img/img-jlf/Proveedores/schneider-logo.png',
 		'/img/img-jlf/Proveedores/weg-logo.webp',
 		];
+
+    const featured = products.slice(0, 3);
 </script>
 
 <!-- Start Header -->
@@ -142,56 +145,23 @@
   classId="portfolio"
 >
   <div class="row">
-    <!-- Producto 1 -->
-    <div class="col-lg-4 col-md-6 col-12">
-      <div class="card portfolio-card">
-        <img
-          src="/img/productos/controladores.webp"
-          alt="Producto Uno"
-          class="card-img-top"
-        />
-        <div class="card-body text-center">
-          <h3 class="card-title">Producto Uno</h3>
-          <a href="/productos/producto-uno" class="btn btn-primary">
-            Detalle <i class="bi bi-arrow-right-short"></i>
-          </a>
+    {#each featured as prod}
+      <div class="col-lg-4 col-md-6 col-12 mb-4">
+        <div class="card portfolio-card">
+          <img
+            src={prod.image}
+            alt={prod.name}
+            class="card-img-top"
+          />
+          <div class="card-body text-center">
+            <h3 class="card-title">{prod.name}</h3>
+            <a href={`/catalog?select=${prod.slug}`} class="btn btn-primary">
+              Detalle <i class="bi bi-arrow-right-short"></i>
+            </a>
+          </div>
         </div>
       </div>
-    </div>
-
-    <!-- Producto 2 -->
-    <div class="col-lg-4 col-md-6 col-12">
-      <div class="card portfolio-card">
-        <img
-          src="/img/productos/motor.webp"
-          alt="Producto Dos"
-          class="card-img-top"
-        />
-        <div class="card-body text-center">
-          <h3 class="card-title">Producto Dos</h3>
-          <a href="/products/producto-dos" class="btn btn-primary">
-            Detalle <i class="bi bi-arrow-right-short"></i>
-          </a>
-        </div>
-      </div>
-    </div>
-
-    <!-- Producto 3 -->
-    <div class="col-lg-4 col-md-6 col-12">
-      <div class="card portfolio-card">
-        <img
-          src="/img/productos/panelElectrico.webp"
-          alt="Producto Tres"
-          class="card-img-top"
-        />
-        <div class="card-body text-center">
-          <h3 class="card-title">Producto Tres</h3>
-          <a href="/products/producto-tres" class="btn btn-primary">
-            Detalle <i class="bi bi-arrow-right-short"></i>
-          </a>
-        </div>
-      </div>
-    </div>
+    {/each}
   </div>
 </Section>
 <!-- End Portfolio -->

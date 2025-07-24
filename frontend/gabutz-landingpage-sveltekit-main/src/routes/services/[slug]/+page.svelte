@@ -28,15 +28,17 @@
 
   <!-- Descripción detallada -->
   <Section classId="service-info">
-    <!-- Este DIV es ya un elemento DOM -->
+  <!-- Contenedor para animación -->
     <div in:fly={{ y: 20, duration: 400, opacity: 0 }}>
       <h2 class="section_title">Descripción del Servicio</h2>
       <div class="service-info-grid">
+        <!-- Columna de texto -->
         <div class="service-text">
           <p>{service.description}</p>
         </div>
+        <!-- Columna de bullet points, garantizando siempre un array -->
         <ul class="service-features">
-          {#each service.features as feat}
+          {#each service.features ?? [] as feat}
             <li>
               <i class="bi bi-check-circle-fill feature-icon"></i>
               <span>{feat}</span>

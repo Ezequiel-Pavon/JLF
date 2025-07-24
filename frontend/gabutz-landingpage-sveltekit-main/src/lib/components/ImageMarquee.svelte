@@ -1,5 +1,6 @@
 <!-- src/lib/components/ImageMarquee.svelte -->
 <script>
+// @ts-nocheck
   import { onMount } from 'svelte';
   export let images = [];
 
