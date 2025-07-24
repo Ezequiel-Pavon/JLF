@@ -1,10 +1,51 @@
+# macOS
 .DS_Store
-node_modules
-/build
-/.svelte-kit
-/package
+
+# Node / SvelteKit
+node_modules/
+build/
+.svelte-kit/
+package/
 .env
 .env.*
 !.env.example
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
+
+# Python / Django
+# Virtualenv
+.venv/
+venv/
+ENV/
+env/
+
+# Byte-compiled / caches
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Django stuff:
+db.sqlite3
+media/          # si guardas uploads aquí
+/staticfiles/   # si usas collectstatic
+
+# Migrations caches
+*/migrations/*.pyc
+*/migrations/__pycache__/
+
+# Logs
+*.log
+
+# IDEs and editors
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Test and coverage
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Optional: local overrides
+*.local
