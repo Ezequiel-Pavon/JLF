@@ -1,7 +1,7 @@
 <script>
 	import Section from '$lib/components/Section.svelte';
 	import MarqueeExample from '$lib/components/MarqueeExample.svelte';
-  import { services } from './services/data.js';
+  import { services } from '../lib/data/services.js';
 
 	const brands = [
 		'/img/img-jlf/Proveedores/chint-logo.png',
@@ -97,21 +97,13 @@
 <!-- End About -->
 
 <!-- Start Services -->
-<Section
-  title="Servicios"
-  classId="service"
->
+<Section title="Servicios" classId="service">
   <div class="row">
     {#each services as service}
       <div class="col-lg-6 col-md-6 col-12 mb-4">
         <div class="card service-card h-100">
-          <!-- Imagen clickeable que lleva al detalle -->
           <a href={`/services/${service.slug}`} style="display: block;">
-            <img
-              src={service.images[0]}
-              alt={service.title}
-              class="card-img-top"
-            />
+            <img src={service.images[0]} alt={service.title} class="card-img-top" />
           </a>
           <div class="card-body text-center">
             <h3 class="card-title">{service.title}</h3>

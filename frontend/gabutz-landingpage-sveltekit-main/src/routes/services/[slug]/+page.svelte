@@ -1,36 +1,65 @@
 <!-- src/routes/services/[slug]/+page.svelte -->
-<script context="module">
-  import { error } from '@sveltejs/kit';
-  import { services } from '../data.js';
-
-  // @ts-ignore
-  export async function load({ params }) {
-    const service = services.find((s) => s.slug === params.slug);
-    if (!service) {
-      throw error(404, 'Servicio no encontrado');
-    }
-    return { service };
-  }
-</script>
-
 <script>
+// @ts-nocheck
+  import { fade, slide, fly} from 'svelte/transition';
   import Section from '$lib/components/Section.svelte';
-  // @ts-ignore
-  export let data;
-  // @ts-ignore
-  const { service } = data;
+  import { page } from '$app/stores';
+  import { services } from '$lib/data/services.js';
+  import ImageMarquee from '$lib/components/ImageMarquee.svelte';
+  
+
+  // Obtenemos el slug y buscamos el servicio
+  $: slug = $page.params.slug;
+  $: service = services.find((s) => s.slug === slug);
 </script>
 
 {#if service}
-  <Section title={service.title} description={service.description} classId="service-detail">
-    <div class="row">
-      {#each service.images as img}
-        <div class="col-md-6 col-12 mb-4">
-          <img src={img} alt={service.title} class="img-fluid rounded" />
+  <!-- Hero Banner -->
+  <div 
+    class="service-hero" 
+    in:fade={{ duration: 400 }}
+    style="background-image: url('{service.images[0]}')"
+  >
+    <div class="overlay">
+      <h1>{service.title}</h1>
+      <p>{service.subtitle || service.description}</p>
+    </div>
+  </div>
+
+  <!-- Descripción detallada -->
+  <Section classId="service-info">
+    <!-- Este DIV es ya un elemento DOM -->
+    <div in:fly={{ y: 20, duration: 400, opacity: 0 }}>
+      <h2 class="section_title">Descripción del Servicio</h2>
+      <div class="service-info-grid">
+        <div class="service-text">
+          <p>{service.description}</p>
         </div>
-      {/each}
+        <ul class="service-features">
+          {#each service.features as feat}
+            <li>
+              <i class="bi bi-check-circle-fill feature-icon"></i>
+              <span>{feat}</span>
+            </li>
+          {/each}
+        </ul>
+      </div>
     </div>
   </Section>
+
+  <!-- Nuevo Carrusel de Imágenes -->
+  <Section title="Galería del Servicio" classId="service-gallery">
+    <ImageMarquee images={service.images} />
+  </Section>
+
+  <!-- CTA -->
+  <div class="service-cta" in:fade={{ delay: 200, duration: 400 }}>
+    <a href="/contact" class="btn btn-primary btn-lg">
+      Contratá este servicio
+    </a>
+  </div>
 {:else}
-  <p>Lo siento, el servicio solicitado no se encontró.</p>
+  <Section title="Servicio no encontrado" classId="service-detail">
+    <p>Lo siento, no pudimos encontrar el servicio “{slug}”.</p>
+  </Section>
 {/if}

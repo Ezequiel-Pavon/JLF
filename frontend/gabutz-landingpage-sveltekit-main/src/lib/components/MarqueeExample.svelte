@@ -16,8 +16,8 @@
 
 <div class="marquee-wrapper">
   <div class="marquee-track">
-    {#each [...reviews, ...reviews] as review, i}
-      <ReviewCard {review} key={i} />
+    {#each [...reviews, ...reviews] as review, i (i)}
+      <ReviewCard {review} />
     {/each}
   </div>
 </div>

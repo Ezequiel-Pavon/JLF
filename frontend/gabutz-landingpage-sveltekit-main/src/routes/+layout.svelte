@@ -5,6 +5,7 @@
 	import Footer from '$lib/components/Footer.svelte';
 	import Navbar from '$lib/components/Navbar.svelte';
 	import '../app.scss';
+	
 
 	onMount(async () => {
 		if (!browser) return;
