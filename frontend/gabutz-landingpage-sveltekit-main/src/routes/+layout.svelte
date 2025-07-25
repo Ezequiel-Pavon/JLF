@@ -15,7 +15,7 @@
 </script>
 
 <svelte:head>
-	<title>Gabutz</title>
+	<title>electrojlf</title>
 </svelte:head>
 
 <!-- Start Navbar -->

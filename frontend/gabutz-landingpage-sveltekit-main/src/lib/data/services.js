@@ -69,5 +69,39 @@ export const services = [
       'Conectividad IIoT',
       'Escalabilidad modular'
     ]
+  },
+  
+  {
+    slug: 'Capacitaciónes',
+    title: 'Capacitaciónes',
+    description: 'Soluciones IIoT y control avanzado para fábricas.',
+    images: [
+      '/img/capacitaciones/planta.webp',
+      '/img/capacitaciones/planta.webp',
+      '/img/capacitaciones/planta.webp',
+    ],
+    features: [
+      'Monitoreo en tiempo real',
+      'Análisis de datos con ML',
+      'Conectividad IIoT',
+      'Escalabilidad modular'
+    ]
+  },
+  
+  {
+    slug: 'Asistente Técnico Oficial WEG',
+    title: 'Asistente Técnico Oficial WEG',
+    description: 'Soluciones IIoT y control avanzado para fábricas.',
+    images: [
+      '/img/WEG/WEG.webp',
+      '/img/img-jlf/industria-4.0/industria2.jpg',
+      '/img/img-jlf/industria-4.0/industria3.jpg',
+    ],
+    features: [
+      'Monitoreo en tiempo real',
+      'Análisis de datos con ML',
+      'Conectividad IIoT',
+      'Escalabilidad modular'
+    ]
   }
 ];

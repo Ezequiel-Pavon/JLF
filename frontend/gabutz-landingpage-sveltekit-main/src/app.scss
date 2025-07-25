@@ -41,8 +41,8 @@
 $bg:#eff0f3;
 $white:#fffffe;
 $gray:#eff0f3;
-$primary:#fd3333;
-$primary_hover:#756bf8;
+$primary:#b61414e0;
+$primary_hover:#155ce0;
 $dark:#0d0d0d;
 $dark_text:#2a2a2a;
 
@@ -98,6 +98,7 @@ body {
         font-size: 4rem;
         font-weight: 800;
         margin-bottom: 0;
+        color : $primary;
     }
 
     span {
