@@ -1,0 +1,13 @@
+{
+  "name": "jlf",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "frontend": "cd frontend && npm run dev",
+    "backend": "cd backend && .venv\\Scripts\\python.exe manage.py runserver",
+    "start": "concurrently \"npm:backend\" \"npm:frontend\""
+  },
+  "devDependencies": {
+    "concurrently": "^8.0.0"
+  }
+}
