@@ -1,4 +1,5 @@
 # accounts/api.py
+from rest_framework.parsers import JSONParser, MultiPartParser, FormParser
 from rest_framework import generics, permissions
 from .models import Product
 from .serializers import ProductSerializer
@@ -14,19 +15,22 @@ class ProductListCreate(generics.ListCreateAPIView):
     """
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
+    parser_classes = [MultiPartParser, FormParser, JSONParser]
+
     def get_permissions(self):
         if self.request.method == 'GET':
             return [permissions.AllowAny()]
         return [IsAdmin()]
 
 class ProductRetrieveUpdateDestroy(generics.RetrieveUpdateDestroyAPIView):
-    """
-    GET: detalle público (AllowAny)
-    PUT/PATCH/DELETE: solo admin (IsAdmin)
-    """
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
+    parser_classes = [MultiPartParser, FormParser, JSONParser]
+
+    lookup_field = 'slug'      # usar el slug en lugar de PK
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+
     def get_permissions(self):
-        if self.request.method == 'GET':
+        if self.request.method in ['GET']:
             return [permissions.AllowAny()]
         return [IsAdmin()]

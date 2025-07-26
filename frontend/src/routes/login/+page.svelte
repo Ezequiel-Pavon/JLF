@@ -17,7 +17,7 @@
       });
       // DRF Simple JWT devuelve { access, refresh }
       authStore.login({ access: data.access, refresh: data.refresh, user: null });
-      goto('/admin/products');
+      goto('/catalog');
     } catch (e) {
       errorMsg = e.message;
     }

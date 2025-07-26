@@ -30,11 +30,10 @@
 	<div class="container">
 		<div class="row align-items-center">
 			<div class="col-lg-6 col-md-6 col-12">
-				<h1>Gab<span>utz</span></h1>
+				<h1>Soluciones integrales para tus proyectos de electricidad</h1>
 				<p>
-					Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptatibus non recusandae
-					voluptatem ea porro modi?
-				</p>
+					Desde hace más de 30 años nos dedicamos a brindarle atención profesional a las empresas e industrias en materia eléctrica, ayudando a que sus procesos productivos se optimicen y no se detengan. 
+        </p>
 			</div>
 			<div class="col-lg-6 col-md-6 col-12">
 				<img src="/img/about.jpg" alt="Hero" class="hero-img img-fluid"/>
@@ -46,25 +45,21 @@
 
 <!-- Start About -->
 <Section
-	title="About US"
-	description="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Soluta, sequi odio esse officia
-					repellendus animi ab harum quasi qui at."
-	classId="about"
->
+	title="Sobre Nosotros"
+	description="Contamos con más de 30 años de experiencia en el rubro, proveemos soluciones integrales en electricidad industrial y domiciliaria con productos de calidad."
+	classId="about">
 	<div class="row align-items-center">
 		<div class="col-lg-5 col-md-6 col-12">
-			<img src="/img/about.svg" alt="About US" />
-		</div>
+    <img src="/img/tecnico.jpg" alt="Sobre Nosotros" width="420" />
+    </div>
 		<div class="col-lg-7 col-md-6 col-12">
 			<div class="row">
 				<div class="col-lg-12 col-md-12 col-12">
 					<div class="card">
 						<div class="card-body">
-							<h3>Lorem Ipsum</h3>
+							<h3>Soluciones Industriales</h3>
 							<p>
-								Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam accusamus, quas odit,
-								asperiores temporibus consequatur eos commodi neque nesciunt dolorem amet doloribus
-								cumque velit perspiciatis enim earum corporis veniam! Earum.
+								Ofrecemos soluciones eléctricas integrales para la industria, desde automatización hasta distribución eléctrica, cumpliendo con las normativas vigentes y asegurando la máxima seguridad operativa.
 							</p>
 						</div>
 					</div>
@@ -72,11 +67,9 @@
 				<div class="col-lg-12 col-md-12 col-12">
 					<div class="card">
 						<div class="card-body">
-							<h3>Lorem Ipsum</h3>
+							<h3>Proyectos Domiciliarios</h3>
 							<p>
-								Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam accusamus, quas odit,
-								asperiores temporibus consequatur eos commodi neque nesciunt dolorem amet doloribus
-								cumque velit perspiciatis enim earum corporis veniam! Earum.
+								Desarrollamos proyectos eléctricos domiciliarios personalizados, con atención a los detalles, materiales certificados y un servicio profesional que asegura instalaciones duraderas y seguras
 							</p>
 						</div>
 					</div>
@@ -84,11 +77,9 @@
 				<div class="col-lg-12 col-md-12 col-12">
 					<div class="card">
 						<div class="card-body">
-							<h3>Lorem Ipsum</h3>
+							<h3>Capacitación</h3>
 							<p>
-								Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam accusamus, quas odit,
-								asperiores temporibus consequatur eos commodi neque nesciunt dolorem amet doloribus
-								cumque velit perspiciatis enim earum corporis veniam! Earum.
+                Brindamos capacitación especializada en instalaciones eléctricas y energías renovables, orientada a profesionales, técnicos y empresas que buscan actualizarse con las últimas normativas y tecnologías del sector.
 							</p>
 						</div>
 					</div>

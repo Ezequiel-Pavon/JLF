@@ -1,4 +1,4 @@
-/* Write your global styles here, in SCSS syntax. Variables and mixins from the src/variables.scss file are available here without importing */ /* Import only what you need from Bootstrap */
+/* Bootstrap parcial y utilidades */
 @import 'bootstrap/scss/root';
 @import 'bootstrap/scss/reboot';
 @import 'bootstrap/scss/type';
@@ -33,169 +33,122 @@
 @import 'bootstrap/scss/helpers';
 @import 'bootstrap/scss/utilities/api';
 
-// Bootstrap Icons
+/* Bootstrap Icons */
 @import 'bootstrap-icons/font/bootstrap-icons.min.css';
 
-// Style
-// Variable
-$bg:#eff0f3;
-$white:#fffffe;
-$gray:#eff0f3;
-$primary:#fd3333;
-$primary_hover:#756bf8;
-$dark:#0d0d0d;
-$dark_text:#2a2a2a;
+/* Variables unificadas */
+$bg: #eff0f3;
+$white: #fffffe;
+$gray: #eff0f3;
+$primary: #fd3333;       // tu primary
+$primary_hover: #756bf8; // tu primary_hover
+$dark: #0d0d0d;
+$dark_text: #2a2a2a;
 
+/* Global */
 html {
-    padding-top: 50px;
-    scroll-behavior: smooth;
+  padding-top: 50px;
+  scroll-behavior: smooth;
 }
-
-// Body
 body {
-    font-family: 'Poppins', sans-serif;
+  font-family: 'Poppins', sans-serif;
 }
 
-/*
-** Home Page CSS
-*/
-
-// Navbar
+/* Navbar (fusionando estilos) */
 .navbar {
-    background: $bg;
-
-    .navbar-brand {
-        font-weight: 800;
-        transition: color .3s ease-in-out;
-
-        &:hover {
-            color: $primary;
-        }
-    }
-
-    .navbar-toggler {
-        border: none;
-        outline: none !important;
-        box-shadow: none !important;
-
-        i {
-            font-size: 1.6rem;
-        }
-    }
-
-    .active {
-        color: $primary !important;
-        font-weight: 600;
-    }
+  background: $bg;
+  .navbar-brand {
+    font-weight: 800;
+    transition: color .3s ease-in-out;
+    &:hover { color: $primary; }
+  }
+  .navbar-toggler {
+    border: none;
+    outline: none !important;
+    box-shadow: none !important;
+    i { font-size: 1.6rem; }
+  }
+  .active {
+    color: $primary !important;
+    font-weight: 600;
+  }
 }
 
-// Header
+/* Header (hero) */
 .header {
-    background: $bg;
-    padding: 2rem 0;
-
-    h1 {
-        font-size: 4rem;
-        font-weight: 800;
-        margin-bottom: 0;
-    }
-
-    span {
-        color: $primary;
-    }
-    .hero-img {
-        max-height: 500px;       // ajusta a tu gusto (200–300px suele funcionar)
-        width: auto;
-        display: block;
-        margin: 0 auto;         // centra la imagen si quieres
-    }
-
-    @media (max-width: 992px) {
-        .hero-img {
-        max-height: 200px;     // más pequeño en pantallas medianas
-        }
-    }
-
-    @media (max-width: 576px) {
-        .hero-img {
-        max-height: 150px;     // aún más pequeño en móviles
-        }
-    }
+  background: $bg;
+  padding: 2rem 0;
+  h1 {
+    font-size: 4rem;
+    font-weight: 800;
+    margin-bottom: 0;
+    color: $primary;
+  }
+  span { color: $primary; }
+  .hero-img {
+    max-height: 500px;
+    width: auto;
+    display: block;
+    margin: 0 auto;
+    @media (max-width: 992px) { max-height: 200px; }
+    @media (max-width: 576px) { max-height: 150px; }
+  }
 }
 
-
-// Section
+/* Secciones genéricas */
 section {
-    padding: 5rem 0;
-
-    .section_title {
-        text-align: center;
-        margin-bottom: .6rem;
-        font-weight: 600;
-        font-size: 2rem;
-    }
-
-    .section_description {
-        text-align: center;
-        margin-bottom: 3rem;
-        color: $dark_text;
-    }
+  padding: 5rem 0;
+  .section_title {
+    text-align: center;
+    margin-bottom: .6rem;
+    font-weight: 600;
+    font-size: 2rem;
+  }
+  .section_description {
+    text-align: center;
+    margin-bottom: 3rem;
+    color: $dark_text;
+  }
 }
 
-// About
+/* About */
 .about {
-    .section_title {
-        color: $dark;
+  .section_title { color: $dark; }
+  .card {
+    background: $gray;
+    margin-bottom: 1rem;
+    border-radius: 8px;
+    transition: all .5s ease-in-out;
+    h3 {
+      color: $dark_text;
+      font-size: 1.4rem;
+      margin-bottom: 0;
+      font-weight: 600;
     }
-
-    .card {
-        background: $gray;
-        margin-bottom: 1rem;
-        border-radius: 8px;
-        transition: all .5s ease-in-out;
-
-        h3 {
-            color: $dark_text;
-            font-size: 1.4rem;
-            margin-bottom: 0;
-            font-weight: 600;
-        }
-
-        p {
-            margin-bottom: 0;
-            color: $dark_text;
-        }
-
-        &:hover {
-            transform: translateY(-6px);
-            cursor: pointer;
-        }
+    p { margin-bottom: 0; color: $dark_text; }
+    &:hover {
+      transform: translateY(-6px);
+      cursor: pointer;
     }
+  }
 }
 
-// Service
+/* Services (index y detalle) */
 .service {
+  /* cards en grid principal */
   .service-card {
     text-decoration: none;
     color: inherit;
     transition: transform .3s ease;
-
-    &:hover {
-      transform: translateY(-6px);
-    }
-
+    &:hover { transform: translateY(-6px); }
     .card-img-top {
       width: 100%;
+      height: 180px;
+      object-fit: cover;
       border-top-left-radius: 10px;
       border-top-right-radius: 10px;
-      object-fit: cover;
-      height: 180px; // ajusta según tu diseño
     }
-
-    .card-body {
-      padding: 1rem;
-    }
-
+    .card-body { padding: 1rem; }
     .card-title {
       margin: 0;
       font-size: 1.4rem;
@@ -204,200 +157,14 @@ section {
   }
 }
 
-// Portfolio
-.portfolio {
-  .portfolio-card {
-    border-radius: 10px;
-    transition: transform .3s ease;
-    margin-bottom: 1.5rem;
-
-    &:hover {
-      transform: translateY(-6px);
-    }
-
-    .card-img-top {
-      width: 100%;
-      height: 200px;       // ajusta a tu gusto
-      object-fit: cover;
-      border-top-left-radius: 10px;
-      border-top-right-radius: 10px;
-    }
-
-    .card-body {
-      padding: 1rem;
-    }
-
-    .card-title {
-      font-size: 1.3rem;
-      font-weight: 600;
-      margin-bottom: 1rem;
-    }
-  }
-}
-
-// Contact
-.contact {
-    background: $bg;
-
-    .section_description {
-        color: $dark_text;
-    }
-
-    iframe {
-        width: 100%;
-        height: 400px;
-    }
-
-    .card {
-        border-radius: 10px;
-
-        .content {
-            display: flex;
-            align-items: center;
-            padding: .5rem 0;
-
-            i {
-                color: $primary;
-                font-size: 2rem;
-                margin-right: .8rem;
-            }
-
-            h3,
-            p {
-                margin-bottom: 0;
-            }
-
-            h3 {
-                font-size: 1.2rem;
-            }
-
-            .hr-dotted {
-                border-top: 1px dotted;
-                opacity: .25;
-                margin: 0;
-            }
-        }
-    }
-
-
-}
-
-// Footer
-.footer {
-    background: $bg;
-    text-align: center;
-    padding: 1rem 0;
-
-    p {
-        margin-bottom: 0;
-
-        i {
-            color: #d43434;
-        }
-    }
-
-    a {
-        color: $primary;
-        text-decoration: none;
-
-        &:hover {
-            color: $primary_hover;
-        }
-    }
-}
-
-/*
-** Utils CSS
-*/
-.btn-primary {
-    background: $primary;
-    border-color: $primary;
-
-    &:hover,
-    &:focus {
-        background: $primary_hover !important;
-        border-color: $primary_hover;
-    }
-}
-
-.back_to_top {
-    background: $primary;
-    width: 60px;
-    position: fixed;
-    right: 3rem;
-    bottom: 3rem;
-    border-radius: 100%;
-    text-align: center;
-    color: $white;
-    padding: .5rem;
-    cursor: pointer;
-    display: none;
-
-    i {
-        font-size: 1.7rem;
-    }
-
-    &:hover {
-        background: $primary_hover;
-        color: $white;
-    }
-}
-
-/* Marquee infinito para logos */
-.brands {
-  .marquee-wrapper {
-    overflow: hidden;
-    padding: 1.5rem 0;
-  }
-
-  .marquee-track {
-    display: inline-flex;
-    /* velocidad ajustada a 15 segundos */
-    animation: marquee 40s linear infinite;
-  }
-
-  .marquee-item {
-    flex: 0 0 auto;
-    margin: 0 1rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .marquee-item img {
-    max-height: 60px;
-  }
-}
-
-@keyframes marquee {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-400%);
-  }
-}
-
-// Service Detail
+/* Service detail */
 .service-detail {
-  .rounded {
-    border-radius: 10px;
-  }
+  .rounded { border-radius: 10px; }
   img {
     width: 100%;
     object-fit: cover;
   }
 }
-.services-index {
-  .service-card {
-    transition: transform .3s ease;
-    &:hover {
-      transform: translateY(-4px);
-    }
-  }
-}
-
-/* Detalle de servicio */
 .service-hero {
   position: relative;
   background-size: cover;
@@ -406,127 +173,117 @@ section {
   color: white;
   text-align: center;
   margin-bottom: 2rem;
-
   .overlay {
     background: rgba(0, 0, 0, 0.5);
     display: inline-block;
     padding: 2rem;
     border-radius: 8px;
-
-    h1 {
-      font-size: 3rem;
-      margin-bottom: 1rem;
-    }
-
-    p {
-      font-size: 1.2rem;
-      max-width: 600px;
-      margin: auto;
-    }
+    h1 { font-size: 3rem; margin-bottom: 1rem; }
+    p { font-size: 1.2rem; max-width: 600px; margin: auto; }
   }
 }
-
 .service-gallery {
   padding: 0 1rem 2rem;
-
   .gallery-grid {
     display: grid;
     gap: 1rem;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-
+    grid-template-columns: repeat(auto-fill, minmax(200px,1fr));
     .thumb {
       overflow: hidden;
       border-radius: 8px;
       cursor: pointer;
       transition: transform .3s ease, box-shadow .3s ease;
-
       &:hover {
         transform: scale(1.05);
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
       }
-
-      img {
-        width: 100%;
-        height: 150px;
-        object-fit: cover;
-      }
+      img { width:100%; height:150px; object-fit:cover; }
     }
   }
 }
-
 .service-cta {
   text-align: center;
   margin-bottom: 4rem;
-
-  .btn {
-    padding: 1rem 2rem;
-  }
+  .btn { padding: 1rem 2rem; }
 }
-
 .service-info {
-  background: #f9f9fa;            /* fondo suave */
+  background: #f9f9fa;
   padding: 4rem 1rem;
-
-  .section_title {
-    text-align: center;
-    font-size: 2rem;
-    margin-bottom: 2rem;
-    color: $dark;
-  }
-
+  .section_title { color: $dark; }
   .service-info-grid {
     display: grid;
     gap: 2rem;
     grid-template-columns: 1fr;
-    
     @media (min-width: 768px) {
-      grid-template-columns: 1.5fr 1fr; /* texto más ancho que bullets */
+      grid-template-columns: 1.5fr 1fr;
     }
   }
-
-  .service-text {
-    font-size: 1.1rem;
-    line-height: 1.7;
-    color: $dark_text;
-  }
-
+  .service-text { font-size: 1.1rem; line-height:1.7; color:$dark_text; }
   .service-features {
-    list-style: none;
-    padding: 0;
-
+    list-style:none;
+    padding:0;
     li {
-      display: flex;
-      align-items: center;
-      margin-bottom: 1rem;
-
+      display:flex;
+      align-items:center;
+      margin-bottom:1rem;
       .feature-icon {
-        font-size: 1.5rem;
-        color: $primary;
-        margin-right: 0.75rem;
-        flex-shrink: 0;
+        font-size:1.5rem;
+        color:$primary;
+        margin-right:0.75rem;
       }
-
-      span {
-        font-size: 1rem;
-        color: $dark_text;
-      }
+      span { color:$dark_text; }
     }
   }
 }
 
-/* Animación slide (si no la tienes ya) */
-@keyframes slideInUp {
-  from {
-    transform: translateY(20px);
-    opacity: 0;
-  }
-  to {
-    transform: translateY(0);
-    opacity: 1;
+/* Portfolio */
+.portfolio {
+  .portfolio-card {
+    border-radius: 10px;
+    transition: transform .3s ease;
+    margin-bottom: 1.5rem;
+    &:hover { transform: translateY(-6px); }
+    .card-img-top {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-top-left-radius: 10px;
+      border-top-right-radius: 10px;
+    }
+    .card-body { padding: 1rem; }
+    .card-title {
+      font-size: 1.3rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
   }
 }
 
-/* Catálogo */
+/* Brands marquee */
+.brands {
+  .marquee-wrapper {
+    overflow: hidden;
+    padding: 1.5rem 0;
+  }
+  .marquee-track {
+    display: inline-flex;
+    animation: marquee 40s linear infinite;
+  }
+  .marquee-item {
+    flex: 0 0 auto;
+    margin: 0 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .marquee-item img { max-height: 60px; }
+}
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-400%); }
+}
+
+/* Catalog */
 .catalog {
   .btn.selected,
   .btn.selected:hover {
@@ -534,53 +291,99 @@ section {
     color: $white;
     border-color: $primary;
   }
-
   .catalog-card {
     border: none;
-    text-align: left;
-    transition: transform .3s ease, box-shadow .3s ease;
-    overflow: hidden;
     background: $white;
-    padding: 0;
-
+    overflow: hidden;
+    transition: transform .3s ease, box-shadow .3s ease;
     &:hover:not(.expanded) {
       transform: scale(1.02);
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
     }
-
     &.expanded {
-      z-index: 2;
+      z-index:2;
       transform: scale(1.05);
-      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
-
-      .card-body {
-        padding: 1rem;
-      }
-
+      box-shadow:0 6px 16px rgba(0,0,0,0.2);
+      .card-body { padding:1rem; }
       .card-img-top {
         transition: transform .3s ease;
         transform: scale(1.1);
       }
     }
-
     .card-img-top {
-      width: 100%;
-      height: 150px;
-      object-fit: cover;
-      border-top-left-radius: 10px;
-      border-top-right-radius: 10px;
+      width:100%;
+      height:150px;
+      object-fit:cover;
+      border-top-left-radius:10px;
+      border-top-right-radius:10px;
       transition: transform .3s ease;
     }
-
     .card-body {
-      padding: .75rem;
-      .card-title {
-        font-size: 1rem;
-        color: $dark_text;
-        margin: 0;
-      }
+      padding:.75rem;
+      .card-title { font-size:1rem; color:$dark_text; margin:0; }
     }
   }
 }
 
+/* Contact */
+.contact {
+  background: $bg;
+  .section_description { color: $dark_text; }
+  iframe { width:100%; height:400px; }
+  .card {
+    border-radius:10px;
+    .content {
+      display:flex;
+      align-items:center;
+      padding:.5rem 0;
+      i { color:$primary; font-size:2rem; margin-right:.8rem; }
+      h3,p { margin:0; }
+      h3 { font-size:1.2rem; }
+      .hr-dotted { border-top:1px dotted; opacity:.25; margin:0; }
+    }
+  }
+}
 
+/* Footer (del compañero) */
+.footer {
+  background: $bg;
+  text-align: center;
+  padding: 1rem 0;
+  p { margin:0; i { color:#d43434; } }
+  a {
+    color: $primary;
+    text-decoration: none;
+    &:hover { color: $primary_hover; }
+  }
+}
+
+/* Utilities */
+.btn-primary {
+  background: $primary;
+  border-color: $primary;
+  &:hover, &:focus {
+    background: $primary_hover !important;
+    border-color: $primary_hover;
+  }
+}
+.back_to_top {
+  background: $primary;
+  width: 60px;
+  position: fixed;
+  right: 3rem;
+  bottom: 3rem;
+  border-radius:100%;
+  text-align:center;
+  color: $white;
+  padding:.5rem;
+  cursor:pointer;
+  display:none;
+  i { font-size:1.7rem; }
+  &:hover { background:$primary_hover; color:$white; }
+}
+
+/* Keyframes extras */
+@keyframes slideInUp {
+  from { transform: translateY(20px); opacity:0; }
+  to   { transform: translateY(0); opacity:1; }
+}
