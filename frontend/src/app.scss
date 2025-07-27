@@ -41,10 +41,11 @@
 $bg:#eff0f3;
 $white:#fffffe;
 $gray:#eff0f3;
-$primary:#fd3333;
-$primary_hover:#756bf8;
+$primary: #A60D10;
+$primary_hover:#1b2f8a;
 $dark:#0d0d0d;
 $dark_text:#2a2a2a;
+
 
 html {
     padding-top: 50px;
@@ -98,6 +99,7 @@ body {
         font-size: 4rem;
         font-weight: 800;
         margin-bottom: 0;
+        color: #A60D10;
     }
 
     span {
