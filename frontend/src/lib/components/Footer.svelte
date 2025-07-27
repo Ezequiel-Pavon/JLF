@@ -1,4 +1,4 @@
-<footer class="text-white text-lg-start bg-primary">
+<footer class="text-white text-lg-start" style="background-color: #112480;">
   <div class="container p-4">
     <div class="row mt-4 text-start">
       <!--Grid column-->
@@ -10,31 +10,24 @@
         <p>
         Ofrecemos soluciones eléctricas integrales para la industria, desde automatización hasta distribución eléctrica, cumpliendo con las normativas vigentes y asegurando la máxima seguridad operativa.
         </p>
-        <!----<div class="mt-4 d-flex gap-2">
-          <a href="#" type="button" class="btn btn-floating btn-primary btn-lg"><i class="fab fa-facebook-f"></i></a>
-          <a href="#" type="button" class="btn btn-floating btn-primary btn-lg"><i class="fab fa-dribbble"></i></a>
-          <a href="#" type="button" class="btn btn-floating btn-primary btn-lg"><i class="fab fa-twitter"></i></a>
-          <a href="#" type="button" class="btn btn-floating btn-primary btn-lg"><i class="fab fa-google-plus-g"></i></a>
-        </div>-->
-
-	<div class="mt-4 d-flex gap-4">
-	  <a href="https://www.facebook.com/electrojlf" type="button">
-	    <img src="/img/socialicons/facebook.png" alt="Facebook" width="18" height="18" />
-	  </a>
-	  	<a href="https://twitter.com/electrojlf_" type="button">
-	    	<img src="/img/socialicons/Twitter.png" alt="Twitter" width="18" height="18" />
-	  	</a>
-	  		<a href="https://www.instagram.com/electrojlf_/" type="button">
-	    		<img src="/img/socialicons/instagram.png" alt="Instagram" width="18" height="18" />
-	  		</a>
-	  	<a href="https://api.whatsapp.com/send?text=https://electrojlf.com.ar/2019/01/08/sitio-en-construccion/" type="button">
-	    	<img src="/img/socialicons/whatsapp.png" alt="Whastapp" width="18" height="18" />
-	  	</a>
-      <a href="https://www.youtube.com/user/electrojlf" type="button">
-	    	<img src="/img/socialicons/Youtube.png" alt="Youtube" width="18" height="18" />
-	  	</a>
-  </div>
-    <br>
+        <div class="mt-4 d-flex gap-4">
+          <a href="https://www.facebook.com/electrojlf" type="button">
+            <img src="/img/socialicons/facebook.png" alt="Facebook" width="18" height="18" />
+          </a>
+          <a href="https://twitter.com/electrojlf_" type="button">
+            <img src="/img/socialicons/Twitter.png" alt="Twitter" width="18" height="18" />
+          </a>
+          <a href="https://www.instagram.com/electrojlf_/" type="button">
+            <img src="/img/socialicons/instagram.png" alt="Instagram" width="18" height="18" />
+          </a>
+          <a href="https://api.whatsapp.com/send?text=https://electrojlf.com.ar/2019/01/08/sitio-en-construccion/" type="button">
+            <img src="/img/socialicons/whatsapp.png" alt="Whastapp" width="18" height="18" />
+          </a>
+          <a href="https://www.youtube.com/user/electrojlf" type="button">
+            <img src="/img/socialicons/Youtube.png" alt="Youtube" width="18" height="18" />
+          </a>
+        </div>
+        <br>
       </div>
       <!--Grid column-->
 
@@ -71,7 +64,7 @@
       <!--Grid column-->
     </div>
   </div>
-  <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+  <div class="text-center p-3" style="background-color: #0d1a5c;">
       Developed by 
      <a class="text-white" href="https://www.linkedin.com/in/octavio-nicolas-pastorive-644796306/">Octavio Pastorive</a>
      <a class="text-white" href="www.linkedin.com/in/eduardo-ezequiel-pavón">Ezequiel Pavón</a>

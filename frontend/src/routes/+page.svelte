@@ -1,8 +1,6 @@
 <script>
-	import Section from '$lib/components/Section.svelte';
 	import MarqueeExample from '$lib/components/MarqueeExample.svelte';
-  import { services } from '../lib/data/services.js';
-  import { products } from '$lib/data/products.js';
+	import Section from '$lib/components/Section.svelte';
 
 	const brands = [
 		'/img/img-jlf/Proveedores/chint-logo.png',
@@ -21,9 +19,44 @@
 		'/img/img-jlf/Proveedores/schneider-logo.png',
 		'/img/img-jlf/Proveedores/weg-logo.webp',
 		];
-
-    const featured = products.slice(0, 3);
 </script>
+
+
+ <!--carousel-->
+<div id="carouselExampleRide" class="carousel slide" data-bs-ride="true">
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="/img/about.jpg" class="d-block w-100" alt="carousel img" width="600" height="350" style="object-fit: cover;">
+      <div class="carousel-caption d-none d-md-block">
+        <h5>First slide label</h5>
+        <p>Some representative placeholder content for the first slide.</p>
+      </div>
+    </div>
+    <div class="carousel-item">
+      <img src="/img/img-jlf/Carousel/001-QUILMES.jpeg" class="d-block w-100" alt="carousel img" width="600" height="350" style="object-fit: cover;">
+      <div class="carousel-caption d-none d-md-block">
+        <h5>First slide label</h5>
+        <p>Some representative placeholder content for the first slide.</p>
+      </div>
+    </div>
+    <div class="carousel-item">
+      <img src="/img/img-jlf/Carousel/tablero1.jpg" class="d-block w-100" alt="carousel img" width="600" height="350" style="object-fit: cover;">
+      <div class="carousel-caption d-none d-md-block">
+        <h5>First slide label</h5>
+        <p>Some representative placeholder content for the first slide.</p>
+      </div>
+    </div>
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleRide" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleRide" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
+<!------>
 
 <!-- Start Header -->
 <header class="header">
@@ -36,7 +69,7 @@
         </p>
 			</div>
 			<div class="col-lg-6 col-md-6 col-12">
-				<img src="/img/about.jpg" alt="Hero" class="hero-img img-fluid"/>
+				<img src="/img/servicios/tablero.jpg" alt="Hero" class="hero-img img-fluid"/>
 			</div>
 		</div>
 	</div>
@@ -91,30 +124,58 @@
 <!-- End About -->
 
 <!-- Start Services -->
-<Section title="Servicios" classId="service">
+<Section
+  title="Servicios"
+  classId="service">
   <div class="row">
-    {#each services as service}
-      <div class="col-lg-6 col-md-6 col-12 mb-4">
-        <div class="card service-card h-100">
-          <a href={`/services/${service.slug}`} style="display: block;">
-            <img src={service.images[0]} alt={service.title} class="card-img-top" />
-          </a>
-          <div class="card-body text-center">
-            <h3 class="card-title">{service.title}</h3>
-          </div>
+    <!-- Card 1: Tableros-->
+    <div class="col-lg-6 col-md-6 col-12">
+      <a href="/services/web-design" class="card service-card">
+        <img src="/img/servicios/tablero.jpg" alt="tableros" class="card-img-top" />
+        <div class="card-body text-center">
+          <h3 class="card-title">Tableros</h3>
         </div>
-      </div>
-    {/each}
+      </a>
+    </div>
+
+    <!-- Card 2: Obras-->
+    <div class="col-lg-6 col-md-6 col-12">
+      <a href="/services/digital-marketing" class="card service-card">
+        <img src="/img/servicios/obras.jpg" alt="obras" class="card-img-top" />
+        <div class="card-body text-center">
+          <h3 class="card-title">Obras</h3>
+        </div>
+      </a>
+    </div>
+
+    <!-- Card 3: Automatizacion -->
+    <div class="col-lg-6 col-md-6 col-12">
+      <a href="/services/web-development" class="card service-card">
+        <img src="/img/servicios/automatizacion.jpg" alt="Web Development" class="card-img-top" />
+        <div class="card-body text-center">
+          <h3 class="card-title">Automatizacion</h3>
+        </div>
+      </a>
+    </div>
+
+    <!-- Card 4: industria -->
+    <div class="col-lg-6 col-md-6 col-12">
+      <a href="/services/analytics" class="card service-card">
+        <img src="/img/servicios/PLANTA-METALMECANICA.jpg" alt="Analytics" class="card-img-top" />
+        <div class="card-body text-center">
+          <h3 class="card-title">Industria 4.0</h3>
+        </div>
+      </a>
+    </div>
   </div>
 </Section>
 <!-- End Services -->
 
 
-
 <!-- Start Brands Carousel -->
 <Section
-  title="Nuestros Aliados"
-  description="Algunas de las marcas que confían en nosotros"
+  title="NUESTROS PROVEEDORES"
+  description="la industria que confía en nosotros"
   classId="brands"
 >
 	<div class="marquee-wrapper">
@@ -136,33 +197,67 @@
   classId="portfolio"
 >
   <div class="row">
-    {#each featured as prod}
-      <div class="col-lg-4 col-md-6 col-12 mb-4">
-        <div class="card portfolio-card">
-          <img
-            src={prod.image}
-            alt={prod.name}
-            class="card-img-top"
-          />
-          <div class="card-body text-center">
-            <h3 class="card-title">{prod.name}</h3>
-            <a href={`/catalog?select=${prod.slug}`} class="btn btn-primary">
-              Detalle <i class="bi bi-arrow-right-short"></i>
-            </a>
-          </div>
+    <!-- Producto 1 -->
+    <div class="col-lg-4 col-md-6 col-12">
+      <div class="card portfolio-card">
+        <img
+          src="/img/productos/controladores.webp"
+          alt="Producto Uno"
+          class="card-img-top"
+        />
+        <div class="card-body text-center">
+          <h3 class="card-title">Producto Uno</h3>
+          <a href="/productos/producto-uno" class="btn btn-primary">
+            Detalle <i class="bi bi-arrow-right-short"></i>
+          </a>
         </div>
       </div>
-    {/each}
+    </div>
+
+    <!-- Producto 2 -->
+    <div class="col-lg-4 col-md-6 col-12">
+      <div class="card portfolio-card">
+        <img
+          src="/img/productos/motor.webp"
+          alt="Producto Dos"
+          class="card-img-top"
+        />
+        <div class="card-body text-center">
+          <h3 class="card-title">Producto Dos</h3>
+          <a href="/products/producto-dos" class="btn btn-primary">
+            Detalle <i class="bi bi-arrow-right-short"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Producto 3 -->
+    <div class="col-lg-4 col-md-6 col-12">
+      <div class="card portfolio-card">
+        <img
+          src="/img/productos/panelElectrico.webp"
+          alt="Producto Tres"
+          class="card-img-top"
+        />
+        <div class="card-body text-center">
+          <h3 class="card-title">Producto Tres</h3>
+          <a href="/products/producto-tres" class="btn btn-primary">
+            Detalle <i class="bi bi-arrow-right-short"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Puedes agregar más productos siguiendo la misma estructura -->
   </div>
 </Section>
 <!-- End Portfolio -->
 
 <!-- Start Testimonials -->
 <Section
-  title="Lo que dicen nuestros empleados"
+  title="Nuestra Familia"
   description="Historias reales de quienes forman parte del equipo"
-  classId="testimonials"
->
+  classId="testimonials">
   <MarqueeExample />
 </Section>
 <!-- End Testimonials -->

@@ -36,14 +36,16 @@
 /* Bootstrap Icons */
 @import 'bootstrap-icons/font/bootstrap-icons.min.css';
 
-/* Variables unificadas */
-$bg: #eff0f3;
-$white: #fffffe;
-$gray: #eff0f3;
-$primary: #fd3333;       // tu primary
-$primary_hover: #756bf8; // tu primary_hover
-$dark: #0d0d0d;
-$dark_text: #2a2a2a;
+// Style
+// Variable
+$bg:#eff0f3;
+$white:#fffffe;
+$gray:#eff0f3;
+$primary: #A60D10;
+$primary_hover:#1b2f8a;
+$dark:#0d0d0d;
+$dark_text:#2a2a2a;
+
 
 /* Global */
 html {
@@ -76,23 +78,37 @@ body {
 
 /* Header (hero) */
 .header {
-  background: $bg;
-  padding: 2rem 0;
-  h1 {
-    font-size: 4rem;
-    font-weight: 800;
-    margin-bottom: 0;
-    color: $primary;
-  }
-  span { color: $primary; }
-  .hero-img {
-    max-height: 500px;
-    width: auto;
-    display: block;
-    margin: 0 auto;
-    @media (max-width: 992px) { max-height: 200px; }
-    @media (max-width: 576px) { max-height: 150px; }
-  }
+    background: $bg;
+    padding: 2rem 0;
+
+    h1 {
+        font-size: 4rem;
+        font-weight: 800;
+        margin-bottom: 0;
+        color: #A60D10;
+    }
+
+    span {
+        color: $primary;
+    }
+    .hero-img {
+        max-height: 500px;       // ajusta a tu gusto (200–300px suele funcionar)
+        width: auto;
+        display: block;
+        margin: 0 auto;         // centra la imagen si quieres
+    }
+
+    @media (max-width: 992px) {
+        .hero-img {
+        max-height: 200px;     // más pequeño en pantallas medianas
+        }
+    }
+
+    @media (max-width: 576px) {
+        .hero-img {
+        max-height: 150px;     // aún más pequeño en móviles
+        }
+    }
 }
 
 /* Secciones genéricas */
