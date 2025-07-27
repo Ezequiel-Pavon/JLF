@@ -139,19 +139,89 @@
       formError = e.message;
     }
   }
+
+// **Nuevo store para edición**  
+const editSlug = writable<string|null>(null);
+const productToEdit = derived(
+  [products, editSlug],
+  ([$p, $e]) => $p.find(x => x.slug === $e) || null
+);
+
+// Campos de edición
+let editName = '';
+let editCategory = '';
+let editDescription = '';
+let editFeaturesInput = '';
+let editFiles: File[] = [];
+let editError = '';
+
+// Inicializar edición con datos del producto  
+function startEdit(prod) {
+  editSlug.set(prod.slug);
+  editName = prod.name;
+  editCategory = prod.category;
+  editDescription = prod.description;
+  editFeaturesInput = (prod.features || []).join(', ');
+  editFiles = [];
+  editError = '';
+}
+
+// Captura nuevos ficheros  
+function handleEditFiles(e) {
+  editFiles = Array.from(e.target.files);
+}
+
+// Cancelar edición  
+function cancelEdit() {
+  editSlug.set(null);
+}
+
+// Enviar cambios  
+async function submitEdit() {
+  editError = '';
+  try {
+    const oldSlug = get(editSlug);
+    if (!oldSlug) return;
+
+    const fd = new FormData();
++   // ¡Añadimos el slug al FormData!
+    fd.append('slug', oldSlug);
+    fd.append('name', editName);
+    fd.append('category', editCategory);
+    fd.append('description', editDescription);
+    fd.append('features', JSON.stringify(
+      editFeaturesInput.split(',').map(s => s.trim()).filter(s => s)
+    ));
+    editFiles.forEach(f => fd.append('images', f, f.name));
+
+    const res = await fetch(
+      `${import.meta.env.VITE_API_BASE_URL}/products/${oldSlug}/`,
+      {
+        method: 'PUT',
+        headers: {
+          Authorization: `Bearer ${get(authStore).accessToken}`
+        },
+        body: fd
+      }
+    );
+    if (!res.ok) {
+      const err = await res.json();
+      editError = JSON.stringify(err, null, 2);
+      return;
+    }
+    const updated = await res.json();
+    products.update(list =>
+      list.map(p => (p.slug === updated.slug ? updated : p))
+    );
+    editSlug.set(null);
+  } catch (e) {
+    editError = e.message;
+  }
+}
 </script>
 
 <Section title="Catálogo de Productos" classId="catalog">
   {#if $isAdmin}
-    <div class="mb-3 text-end">
-      <button
-        class="btn btn-success"
-        on:click={() => showForm.update(v => !v)}
-      >
-        {#if $showForm}✖ Cancelar{:else}+ Agregar Producto{/if}
-      </button>
-    </div>
-
     {#if $showForm}
       <div class="card mb-4">
         <div class="card-body">
@@ -242,17 +312,17 @@
     {/if}
   {/if}
 
-  <!-- Búsqueda y filtros -->
-  <div class="row mb-4">
-    <div class="col-md-6 mb-3">
+  <!-- Fila única: búsqueda / filtros / agregar (igual que antes) -->
+  <div class="row mb-4 align-items-center">
+    <div class="col-md-5 mb-2 mb-md-0">
       <input
         type="text"
         class="form-control"
         placeholder="Buscar producto..."
-        on:input={(e) => search.set(e.target.value)}
+        on:input={e => search.set(e.target.value)}
       />
     </div>
-    <div class="col-md-6 mb-3">
+    <div class="col-md-5 mb-2 mb-md-0">
       <div class="d-flex flex-wrap gap-2">
         {#each $categories as cat}
           <button
@@ -266,58 +336,101 @@
         {/each}
       </div>
     </div>
+    {#if $isAdmin}
+      <div class="col-md-2 text-end">
+        <button
+          class="btn btn-success w-100"
+          on:click={() => startEdit({slug:'',name:'',category:'',description:'',features:[]})}
+        >
+          + Agregar
+        </button>
+      </div>
+    {/if}
   </div>
 
   <!-- Grid de productos -->
   <div class="row">
     {#each $filtered as prod}
       <div class="col-lg-3 col-md-4 col-6 mb-4 position-relative">
-        <div class="card catalog-card h-100 text-start { $selectedSlug === prod.slug ? 'expanded' : '' }">
-          <!-- Botón de eliminar en esquina -->
-          <button
-            class="btn btn-sm btn-outline-danger position-absolute"
-            style="top: 0.5rem; right: 0.5rem; z-index:10;"
-            on:click={() => confirmDelete(prod.slug)}
-          >
-            🗑
-          </button>
-
-          {#if $deleteSlug === prod.slug}
-            <!-- Capa de confirmación -->
-            <div class="position-absolute w-100 h-100 d-flex flex-column justify-content-center align-items-center bg-white bg-opacity-75" style="z-index:20; top:0; left:0;">
-              <p>¿Eliminar <strong>{prod.name}</strong>?</p>
-              <div class="d-flex gap-2">
-                <button class="btn btn-sm btn-danger" on:click={() => deleteProduct(prod.slug)}>Sí</button>
-                <button class="btn btn-sm btn-secondary" on:click={cancelDelete}>No</button>
-              </div>
-            </div>
+        <div class="card catalog-card h-100 text-start">
+          {#if $isAdmin}
+            <!-- Botón borrar -->
+            <button
+              class="btn btn-sm btn-outline-danger position-absolute"
+              style="top:.5rem;right:.5rem;z-index:10"
+              on:click={() => confirmDelete(prod.slug)}
+            >🗑</button>
           {/if}
 
-          <!-- Resto de la tarjeta -->
-          <!-- svelte-ignore a11y-no-redundant-roles -->
+          <!-- Tarjeta clickeable -->
           <button
             type="button"
-            role="button"
-            tabindex="0"
-            class="card-body-wrapper h-100"
+            class="card-body text-start p-0 border-0 bg-transparent"
             on:click={() => selectProduct(prod.slug)}
+            on:keydown={(e) => {
+              if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                selectProduct(prod.slug);
+              }
+            }}
+            aria-label="Ver detalles de {prod.name}"
           >
             <img
               src={prod.images?.[0] ?? '/img/placeholder.png'}
-              alt={prod.name}
               class="card-img-top"
+              alt={prod.name}
             />
-            <div class="card-body">
-              <h5 class="card-title">{prod.name}</h5>
+            <div class="p-2">
+              <h5 class="card-title mb-1">{prod.name}</h5>
+              <p class="mb-2 text-muted">{prod.category}</p>
+
+              <!-- 🔥 BLOQUE DE DETALLES: solo visible si está seleccionado -->
               {#if $selectedSlug === prod.slug}
-                <p class="mt-2">Categoría: {prod.category}</p>
-                <p>{prod.description ?? 'Descripción no disponible.'}</p>
-                <a href="/contact" class="btn btn-primary btn-sm mt-2">Contactar</a>
+                <p class="mb-2">{prod.description}</p>
               {/if}
+
+              <div class="d-flex gap-2">
+                <a href="/contact" class="btn btn-primary btn-sm">Contactar</a>
+                {#if $isAdmin}
+                  <button
+                    type="button"
+                    class="btn btn-outline-secondary btn-sm"
+                    on:click|stopPropagation={() => startEdit(prod)}
+                  >
+                    Editar
+                  </button>
+                {/if}
+              </div>
             </div>
           </button>
-        </div>
-      </div>
+
+          {#if $deleteSlug === prod.slug}
+            <!-- Capa confirmación borrado -->
+            <div
+              class="position-absolute top-0 start-0 w-100 h-100 d-flex
+                     justify-content-center align-items-center bg-white
+                     bg-opacity-75"
+              style="z-index:20"
+            >
+              <p>¿Eliminar <strong>{prod.name}</strong>?</p>
+              <div class="d-flex gap-2">
+                <button
+                  class="btn btn-sm btn-danger"
+                  on:click={() => deleteProduct(prod.slug)}
+                >
+                  Sí
+                </button>
+                <button
+                  class="btn btn-sm btn-secondary"
+                  on:click={cancelDelete}
+                >
+                  No
+                </button>
+              </div>
+            </div>
+          {/if}
+        </div> 
+      </div>  
     {/each}
 
     {#if $filtered.length === 0}
@@ -328,16 +441,57 @@
   </div>
 </Section>
 
+{#if $editSlug}
+  <!-- Modal -->
+  <div class="modal d-block" tabindex="-1" style="background: rgba(0,0,0,0.5);">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">
+            {#if $productToEdit}
+              Editar «{$productToEdit.name}»
+            {:else}
+              Nuevo Producto
+            {/if}
+          </h5>
+          <button type="button" class="btn-close" aria-label="Cerrar" on:click={cancelEdit}></button>
+        </div>
+        <div class="modal-body">
+          {#if editError}
+            <div class="alert alert-danger">{editError}</div>
+          {/if}
+          <div class="mb-3">
+            <label for="edit-name" class="form-label">Nombre</label>
+            <input id="edit-name" class="form-control" bind:value={editName} />
+          </div>
+          <div class="mb-3">
+            <label for="edit-category" class="form-label">Categoría</label>
+            <input id="edit-category" class="form-control" bind:value={editCategory} />
+          </div>
+          <div class="mb-3">
+            <label for="edit-features" class="form-label">Features (coma)</label>
+            <input id="edit-features" class="form-control" bind:value={editFeaturesInput} />
+          </div>
+          <div class="mb-3">
+            <label for="edit-description" class="form-label">Descripción</label>
+            <textarea id="edit-description" class="form-control" rows="3" bind:value={editDescription}></textarea>
+          </div>
+          <div class="mb-3">
+            <label for="edit-images" class="form-label">Añadir Imágenes</label>
+            <input id="edit-images" type="file" multiple class="form-control" on:change={handleEditFiles} />
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" on:click={cancelEdit}>Cancelar</button>
+          <button class="btn btn-primary" on:click={submitEdit}>
+            {productToEdit ? 'Guardar Cambios' : 'Crear Producto'}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+{/if}
+
 <style>
-  .card-body-wrapper {
-    display: block;
-    text-align: left;
-    border: none;
-    background: transparent;
-    width: 100%;
-    height: 100%;
-    padding: 0;
-  }
-  .position-relative { position: relative; }
-  .position-absolute { position: absolute; }
+  .d-block.modal { display: block; } /* fuerza mostrar */
 </style>

@@ -20,7 +20,7 @@
 				<a class="nav-link active" aria-current="page" href="/">Inicio</a>
 				<a class="nav-link" href="#about">Nosotros</a>
 				<a class="nav-link" href="#service">Servicios</a>
-				<a class="nav-link" href="#portfolio">Productos</a>
+				<a class="nav-link" href="/catalog">Productos</a>
 				<a class="nav-link" href="#contact">Contacto</a>
 				<a class="nav-link align-self-center ms-2" href="/login">
   				<!--<span class="me-1">Admin</span>-->

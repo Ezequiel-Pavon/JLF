@@ -1,6 +1,10 @@
 <script>
+// @ts-nocheck
 	import MarqueeExample from '$lib/components/MarqueeExample.svelte';
 	import Section from '$lib/components/Section.svelte';
+  import { onMount } from 'svelte';
+  import { writable, derived } from 'svelte/store';
+  import { apiFetch } from '$lib/api';
 
 	const brands = [
 		'/img/img-jlf/Proveedores/chint-logo.png',
@@ -19,6 +23,32 @@
 		'/img/img-jlf/Proveedores/schneider-logo.png',
 		'/img/img-jlf/Proveedores/weg-logo.webp',
 		];
+
+    // 1) Traer todos los productos
+    const products = writable([]);
+    onMount(async () => {
+      products.set(await apiFetch('/products/'));
+    });
+
+    // 2) Seleccionar los 3 primeros y rellenar con nulls hasta longitud 3
+    const featured = derived(products, ($products) => {
+      const slice = $products.slice(0, 3);
+      while (slice.length < 3) slice.push(null);
+      return slice;
+    });
+
+    // 3) Cargar servicios
+    const services = writable([]);
+    onMount(async () => {
+      services.set(await apiFetch('/services/'));
+    });
+
+    // 4) Tomar los primeros 4, rellenar con null
+    const featuredServices = derived(services, ($services) => {
+      const slice = $services.slice(0, 4);
+      while (slice.length < 4) slice.push(null);
+      return slice;
+    });
 </script>
 
 
@@ -123,50 +153,35 @@
 </Section>
 <!-- End About -->
 
-<!-- Start Services -->
-<Section
-  title="Servicios"
-  classId="service">
+<!-- Start Services Dinámico -->
+<Section title="Servicios" classId="service">
   <div class="row">
-    <!-- Card 1: Tableros-->
-    <div class="col-lg-6 col-md-6 col-12">
-      <a href="/services/web-design" class="card service-card">
-        <img src="/img/servicios/tablero.jpg" alt="tableros" class="card-img-top" />
-        <div class="card-body text-center">
-          <h3 class="card-title">Tableros</h3>
+    {#each $featuredServices as svc}
+      {#if svc}
+        <div class="col-lg-6 col-md-6 col-12 mb-4">
+          <a href={`/services/${svc.slug}`} class="card service-card h-100">
+            <img 
+              src={svc.images?.[0] ?? '/img/placeholder.png'} 
+              alt={svc.title} 
+              class="card-img-top"
+            />
+            <div class="card-body text-center">
+              <h3 class="card-title">{svc.title}</h3>
+            </div>
+          </a>
         </div>
-      </a>
-    </div>
-
-    <!-- Card 2: Obras-->
-    <div class="col-lg-6 col-md-6 col-12">
-      <a href="/services/digital-marketing" class="card service-card">
-        <img src="/img/servicios/obras.jpg" alt="obras" class="card-img-top" />
-        <div class="card-body text-center">
-          <h3 class="card-title">Obras</h3>
+      {:else}
+        <!-- Placeholder atractivo -->
+        <div class="col-lg-6 col-md-6 col-12 mb-4">
+          <div class="card placeholder-card h-100 d-flex align-items-center justify-content-center">
+            <div class="placeholder-content">
+              <i class="bi bi-hourglass-split placeholder-icon"></i>
+              <p>Próximamente</p>
+            </div>
+          </div>
         </div>
-      </a>
-    </div>
-
-    <!-- Card 3: Automatizacion -->
-    <div class="col-lg-6 col-md-6 col-12">
-      <a href="/services/web-development" class="card service-card">
-        <img src="/img/servicios/automatizacion.jpg" alt="Web Development" class="card-img-top" />
-        <div class="card-body text-center">
-          <h3 class="card-title">Automatizacion</h3>
-        </div>
-      </a>
-    </div>
-
-    <!-- Card 4: industria -->
-    <div class="col-lg-6 col-md-6 col-12">
-      <a href="/services/analytics" class="card service-card">
-        <img src="/img/servicios/PLANTA-METALMECANICA.jpg" alt="Analytics" class="card-img-top" />
-        <div class="card-body text-center">
-          <h3 class="card-title">Industria 4.0</h3>
-        </div>
-      </a>
-    </div>
+      {/if}
+    {/each}
   </div>
 </Section>
 <!-- End Services -->
@@ -197,58 +212,35 @@
   classId="portfolio"
 >
   <div class="row">
-    <!-- Producto 1 -->
-    <div class="col-lg-4 col-md-6 col-12">
-      <div class="card portfolio-card">
-        <img
-          src="/img/productos/controladores.webp"
-          alt="Producto Uno"
-          class="card-img-top"
-        />
-        <div class="card-body text-center">
-          <h3 class="card-title">Producto Uno</h3>
-          <a href="/productos/producto-uno" class="btn btn-primary">
-            Detalle <i class="bi bi-arrow-right-short"></i>
-          </a>
+    {#each $featured as prod}
+      {#if prod}
+        <div class="col-lg-4 col-md-6 col-12 mb-4">
+          <div class="card portfolio-card h-100">
+            <img
+              src={prod.images?.[0] ?? '/img/placeholder.png'}
+              alt={prod.name}
+              class="card-img-top"
+            />
+            <div class="card-body text-center">
+              <h3 class="card-title">{prod.name}</h3>
+              <a href={`/catalog?select=${prod.slug}`} class="btn btn-primary">
+                Detalle <i class="bi bi-arrow-right-short"></i>
+              </a>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
-
-    <!-- Producto 2 -->
-    <div class="col-lg-4 col-md-6 col-12">
-      <div class="card portfolio-card">
-        <img
-          src="/img/productos/motor.webp"
-          alt="Producto Dos"
-          class="card-img-top"
-        />
-        <div class="card-body text-center">
-          <h3 class="card-title">Producto Dos</h3>
-          <a href="/products/producto-dos" class="btn btn-primary">
-            Detalle <i class="bi bi-arrow-right-short"></i>
-          </a>
+      {:else}
+        <!-- Placeholder atractivo -->
+        <div class="col-lg-4 col-md-6 col-12 mb-4">
+          <div class="card placeholder-card h-100 d-flex align-items-center justify-content-center">
+            <div class="placeholder-content">
+              <i class="bi bi-box-seam placeholder-icon"></i>
+              <p>Próximamente</p>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
-
-    <!-- Producto 3 -->
-    <div class="col-lg-4 col-md-6 col-12">
-      <div class="card portfolio-card">
-        <img
-          src="/img/productos/panelElectrico.webp"
-          alt="Producto Tres"
-          class="card-img-top"
-        />
-        <div class="card-body text-center">
-          <h3 class="card-title">Producto Tres</h3>
-          <a href="/products/producto-tres" class="btn btn-primary">
-            Detalle <i class="bi bi-arrow-right-short"></i>
-          </a>
-        </div>
-      </div>
-    </div>
-
-    <!-- Puedes agregar más productos siguiendo la misma estructura -->
+      {/if}
+    {/each}
   </div>
 </Section>
 <!-- End Portfolio -->
@@ -312,3 +304,23 @@
   </div>
 </Section>
 <!-- End Contact -->
+
+<style lang="scss">
+  .placeholder-card {
+    background: #f5f5f5;
+    border: 2px dashed #ccc;
+    color: #666;
+    transition: background .3s ease;
+    &:hover {
+      background: #e9e9e9;
+    }
+  }
+  .placeholder-content {
+    text-align: center;
+    font-size: 1.1rem;
+  }
+  .placeholder-icon {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+  }
+</style>
