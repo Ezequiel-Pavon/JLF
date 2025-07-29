@@ -1,8 +1,8 @@
 # accounts/api.py
 from rest_framework.parsers import JSONParser, MultiPartParser, FormParser
 from rest_framework import generics, permissions
-from .models import Product
-from .serializers import ProductSerializer
+from .models import Product, Service
+from .serializers import ProductSerializer, ServiceSerializer
 
 class IsAdmin(permissions.BasePermission):
     def has_permission(self, request, view):
@@ -30,6 +30,25 @@ class ProductRetrieveUpdateDestroy(generics.RetrieveUpdateDestroyAPIView):
     lookup_field = 'slug'      # usar el slug en lugar de PK
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
+    def get_permissions(self):
+        if self.request.method in ['GET']:
+            return [permissions.AllowAny()]
+        return [IsAdmin()]
+    
+class ServiceListCreateAPI(generics.ListCreateAPIView):
+    queryset = Service.objects.all()
+    serializer_class = ServiceSerializer
+    parser_classes = [MultiPartParser, FormParser, JSONParser]
+    def get_permissions(self):
+        if self.request.method == 'GET':
+            return [permissions.AllowAny()]
+        return [IsAdmin()]
+
+class ServiceDetailAPI(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Service.objects.all()
+    serializer_class = ServiceSerializer
+    lookup_field = 'slug'
+    parser_classes = [MultiPartParser, FormParser, JSONParser]
     def get_permissions(self):
         if self.request.method in ['GET']:
             return [permissions.AllowAny()]

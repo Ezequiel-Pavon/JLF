@@ -1,10 +1,11 @@
-<script>
+<script lang="ts">
 // @ts-nocheck
 	import MarqueeExample from '$lib/components/MarqueeExample.svelte';
 	import Section from '$lib/components/Section.svelte';
   import { onMount } from 'svelte';
-  import { writable, derived } from 'svelte/store';
+  import { writable, derived, get } from 'svelte/store';
   import { apiFetch } from '$lib/api';
+  import { authStore } from '$lib/stores';
 
 	const brands = [
 		'/img/img-jlf/Proveedores/chint-logo.png',
@@ -24,6 +25,14 @@
 		'/img/img-jlf/Proveedores/weg-logo.webp',
 		];
 
+    interface Service {
+      slug: string;
+      title: string;
+      description?: string;
+      images?: string[];
+      features?: string[];
+    }
+
     // 1) Traer todos los productos
     const products = writable([]);
     onMount(async () => {
@@ -38,18 +47,98 @@
     });
 
     // 3) Cargar servicios
-    const services = writable([]);
+    const servicesList = writable<Service[]>([]);
     onMount(async () => {
-      services.set(await apiFetch('/services/'));
+      servicesList.set(await apiFetch('/services/'));
     });
 
     // 4) Tomar los primeros 4, rellenar con null
-    const featuredServices = derived(services, ($services) => {
+    const featuredServices = derived(servicesList, ($services) => {
       const slice = $services.slice(0, 4);
       while (slice.length < 4) slice.push(null);
       return slice;
     });
-</script>
+
+    // 5) Control de formulario de creación
+    const showForm = writable(false);
+    let newSlug = '';
+    let newTitle = '';
+    let newDescription = '';
+    let newFeatures = '';
+    let newFiles: File[] = [];
+    let formError = '';
+
+    function handleNewFiles(e) {
+      newFiles = Array.from(e.target.files);
+    }
+
+    async function submitNewService() {
+      formError = '';
+      try {
+        const fd = new FormData();
+        fd.append('slug', newSlug);
+        fd.append('title', newTitle);
+        fd.append('description', newDescription);
+        newFeatures
+          .split(',')
+          .map(s => s.trim())
+          .filter(s => s)
+          .forEach(f => fd.append('features', f));
+        newFiles.forEach(f => fd.append('images_upload', f, f.name));
+
+        const res = await fetch(`${import.meta.env.VITE_API_BASE_URL}/services/`, {
+          method: 'POST',
+          headers: {
+            Authorization: `Bearer ${get(authStore).accessToken}`
+          },
+          body: fd
+        });
+        if (!res.ok) {
+          const err = await res.json();
+          formError = JSON.stringify(err, null, 2);
+          return;
+        }
+        const created: Service = await res.json();
+        servicesList.update(list => [created, ...list]);
+        showForm.set(false);
+        // reset
+        newSlug = newTitle = newDescription = newFeatures = '';
+        newFiles = [];
+      } catch (e) {
+        formError = e.message;
+      }
+    }
+
+    // 6) Sólo admins ven el botón
+    const isAdmin = derived(authStore, $a => !!$a.accessToken);
+    const services = derived(authStore, $a => $a.accessToken ? apiFetch('/services/') : []);
+
+    // función para borrar servicios
+    async function deleteService(slug: string) {
+      if (!confirm(`¿Seguro que querés eliminar el servicio “${slug}”?`)) return;
+      try {
+        const token = get(authStore).accessToken;
+        const res = await fetch(
+          `${import.meta.env.VITE_API_BASE_URL.replace(/\/+$/, '')}/services/${slug}/`,
+          {
+            method: 'DELETE',
+            headers: {
+              Authorization: `Bearer ${token}`
+            }
+          }
+        );
+        if (!res.ok) {
+          // trata de leer detalle
+          const err = await res.json().catch(() => ({}));
+          throw new Error(err.detail || res.statusText);
+        }
+        // actualizar store removiendo el eliminado
+        servicesList.update(list => list.filter(svc => svc?.slug !== slug));
+      } catch (e: any) {
+        alert(`Error al borrar: ${e.message}`);
+      }
+    }
+  </script>
 
 
  <!--carousel-->
@@ -70,7 +159,7 @@
       </div>
     </div>
     <div class="carousel-item">
-      <img src="/img/img-jlf/Carousel/tablero1.jpg" class="d-block w-100" alt="carousel img" width="600" height="350" style="object-fit: cover;">
+      <img src="/img/img-jlf/Tableros/tablero.jpg" class="d-block w-100" alt="carousel img" width="600" height="350" style="object-fit: cover;">
       <div class="carousel-caption d-none d-md-block">
         <h5>First slide label</h5>
         <p>Some representative placeholder content for the first slide.</p>
@@ -99,7 +188,7 @@
         </p>
 			</div>
 			<div class="col-lg-6 col-md-6 col-12">
-				<img src="/img/servicios/tablero.jpg" alt="Hero" class="hero-img img-fluid"/>
+				<img src="/img/img-jlf/Tableros/tablero.jpg" alt="Hero" class="hero-img img-fluid"/>
 			</div>
 		</div>
 	</div>
@@ -153,30 +242,86 @@
 </Section>
 <!-- End About -->
 
-<!-- Start Services Dinámico -->
+<!-- START SERVICES Dinámico -->
 <Section title="Servicios" classId="service">
+  {#if $isAdmin}
+    <div class="mb-3 text-end">
+      <button class="btn btn-success" on:click={() => showForm.update(v => !v)}>
+        {#if $showForm}✖ Cancelar{:else}+ Agregar Servicio{/if}
+      </button>
+    </div>
+
+    {#if $showForm}
+      <div class="card mb-4">
+        <div class="card-body">
+          {#if formError}
+            <div class="alert alert-danger">{formError}</div>
+          {/if}
+          <div class="row g-3">
+            <div class="col-md-4">
+              <label for="new-slug" class="form-label">Slug</label>
+              <input id="new-slug" class="form-control" bind:value={newSlug} placeholder="p.ej. servicio-nuevo" />
+            </div>
+            <div class="col-md-4">
+              <label for="new-title" class="form-label">Título</label>
+              <input id="new-title" class="form-control" bind:value={newTitle} placeholder="Título del servicio" />
+            </div>
+            <div class="col-md-4">
+              <label for="new-features" class="form-label">Features (coma)</label>
+              <input id="new-features" class="form-control" bind:value={newFeatures} placeholder="Feat1, Feat2, ..." />
+            </div>
+            <div class="col-12">
+              <label for="new-description" class="form-label">Descripción</label>
+              <textarea id="new-description" class="form-control" rows="2" bind:value={newDescription} />
+            </div>
+            <div class="col-md-6">
+              <label for="new-images" class="form-label">Imágenes</label>
+              <input id="new-images" type="file" multiple class="form-control" on:change={handleNewFiles} />
+            </div>
+            <div class="col-12 text-end">
+              <button class="btn btn-primary" on:click={submitNewService}>Guardar Servicio</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    {/if}
+  {/if}
+
   <div class="row">
     {#each $featuredServices as svc}
       {#if svc}
-        <div class="col-lg-6 col-md-6 col-12 mb-4">
-          <a href={`/services/${svc.slug}`} class="card service-card h-100">
-            <img 
-              src={svc.images?.[0] ?? '/img/placeholder.png'} 
-              alt={svc.title} 
-              class="card-img-top"
-            />
+        <div class="col-lg-6 col-md-6 col-12 mb-4 position-relative">
+          <!-- Botón de borrar en la esquina superior derecha -->
+          {#if $isAdmin}
+            <button
+              class="btn btn-sm btn-danger position-absolute"
+              style="top:0.5rem; right:0.5rem; z-index:10;"
+              on:click={() => deleteService(svc.slug)}
+            >
+              <i class="bi bi-trash"></i>
+            </button>
+          {/if}
+
+          <a href={`/services/${svc.slug}`} class="card service-card h-100 text-decoration-none">
+            {#if svc.images?.length}
+              <img src={svc.images[0]} alt={svc.title} class="card-img-top" />
+            {:else}
+              <div class="placeholder-card card-img-top d-flex align-items-center justify-content-center">
+                <i class="bi bi-image placeholder-icon"></i>
+              </div>
+            {/if}
             <div class="card-body text-center">
               <h3 class="card-title">{svc.title}</h3>
             </div>
           </a>
         </div>
       {:else}
-        <!-- Placeholder atractivo -->
+        <!-- Placeholder “Próximamente” -->
         <div class="col-lg-6 col-md-6 col-12 mb-4">
           <div class="card placeholder-card h-100 d-flex align-items-center justify-content-center">
-            <div class="placeholder-content">
-              <i class="bi bi-hourglass-split placeholder-icon"></i>
-              <p>Próximamente</p>
+            <div class="placeholder-content text-center">
+              <i class="bi bi-hourglass-split fs-1 text-muted"></i>
+              <p class="mt-2 text-muted">Próximamente</p>
             </div>
           </div>
         </div>
@@ -184,7 +329,7 @@
     {/each}
   </div>
 </Section>
-<!-- End Services -->
+<!-- END SERVICES -->
 
 
 <!-- Start Brands Carousel -->

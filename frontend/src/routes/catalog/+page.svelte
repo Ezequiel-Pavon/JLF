@@ -340,9 +340,9 @@ async function submitEdit() {
       <div class="col-md-2 text-end">
         <button
           class="btn btn-success w-100"
-          on:click={() => startEdit({slug:'',name:'',category:'',description:'',features:[]})}
+          on:click={() => showForm.update(v => !v)}
         >
-          + Agregar
+          {#if $showForm}✖ Cancelar{:else}+ Agregar{/if}
         </button>
       </div>
     {/if}
