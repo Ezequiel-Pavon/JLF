@@ -13,37 +13,22 @@ Aplicación web para la gestión y visualización de materiales eléctricos, des
    git clone https://github.com/Ezequiel-Pavon/JLF.git
    cd JLF
 ````
+npm install
 
-2. Instalar dependencias del frontend:
+python -m venv venv
+source venv/bin/activate   # Linux / Mac
+venv\Scripts\activate      # Windows
+pip install -r requirements.txt
 
-   ```bash
-   npm install
-   ```
-3. (Opcional) Configurar entorno de backend en Python:
+▶️ Ejecución
 
-   ```bash
-   python -m venv venv
-   source venv/bin/activate   # Linux / Mac
-   venv\Scripts\activate      # Windows
-   pip install -r requirements.txt
-   ```
+Iniciar servidor de desarrollo (frontend):
+npm run dev
 
-## ▶️ Ejecución
+python app.py
 
-* Iniciar servidor de desarrollo (frontend):
+##📂 Estructura del proyecto
 
-  ```bash
-  npm run dev
-  ```
-* Iniciar backend en Python (si aplica):
-
-  ```bash
-  python app.py
-  ```
-
-## 📂 Estructura del proyecto
-
-```
 JLF/
  ├── src/            # Código fuente del frontend
  ├── public/         # Archivos estáticos
@@ -51,22 +36,3 @@ JLF/
  ├── package.json    # Dependencias frontend
  ├── requirements.txt# Dependencias backend
  └── README.md
-```
-
-## 🤝 Contribución
-
-1. Haz un fork del proyecto
-2. Crea una nueva rama (`git checkout -b feature-nueva`)
-3. Realiza tus cambios y haz commit
-4. Haz push a tu rama
-5. Abre un Pull Request
-
-## 📜 Licencia
-
-Este proyecto está bajo la licencia MIT. Consulta el archivo [LICENSE](LICENSE) para más detalles.
-
-```
-
----
-
-
