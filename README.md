@@ -2,12 +2,12 @@
 
 Pagina Web para de la empresa JLF 
 
-## 🚀 Tecnologías utilizadas
+## Tecnologías utilizadas
 - **Frontend:** Svelte, JavaScript, SCSS  
 - **Backend:** Python  
 - **Control de versiones:** Git + GitHub  
 
-## 📦 Instalación
+## Instalación
 1. Clonar el repositorio:
 
 ```
