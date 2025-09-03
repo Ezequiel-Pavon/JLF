@@ -28,7 +28,7 @@ Aplicación web para la gestión y visualización de materiales eléctricos, des
 
 ```
 
-▶️ Ejecución
+##Ejecución
 
 Iniciar servidor de desarrollo (frontend):
 
@@ -38,15 +38,15 @@ Iniciar servidor de desarrollo (frontend):
 
 ```
 
-##📂 Estructura del proyecto
+📂 Estructura
 ```
 
 JLF/
- ├── src/            # Código fuente del frontend
- ├── public/         # Archivos estáticos
- ├── backend/        # Lógica en Python
- ├── package.json    # Dependencias frontend
- ├── requirements.txt# Dependencias backend
+ ├── src/               # Código fuente del frontend
+ ├── public/            # Archivos estáticos
+ ├── backend/           # Lógica en Python
+ ├── package.json       # Dependencias frontend
+ ├── requirements.txt   # Dependencias backend
  └── README.md
 
 ```
