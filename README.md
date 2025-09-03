@@ -1,6 +1,6 @@
 # JLF - Materiales Eléctricos
 
-Aplicación web para la gestión y visualización de materiales eléctricos, desarrollada con tecnologías modernas de frontend y backend.
+Pagina Web para de la empresa JLF 
 
 ## 🚀 Tecnologías utilizadas
 - **Frontend:** Svelte, JavaScript, SCSS  
@@ -16,7 +16,6 @@ Aplicación web para la gestión y visualización de materiales eléctricos, des
    cd JLF
 
    npm install
-
 ```
 
 
@@ -25,22 +24,20 @@ Aplicación web para la gestión y visualización de materiales eléctricos, des
    source venv/bin/activate   # Linux / Mac
    venv\Scripts\activate      # Windows
    pip install -r requirements.txt
-
 ```
 
-# Ejecución
+## Ejecución
 
 Iniciar servidor de desarrollo (frontend):
 
 ```
    npm run dev
    python app.py
-
 ```
 
-# 📂 Estructura
-```
+## 📂 Estructura
 
+```
 JLF/
  ├── src/               # Código fuente del frontend
  ├── public/            # Archivos estáticos
@@ -48,5 +45,4 @@ JLF/
  ├── package.json       # Dependencias frontend
  ├── requirements.txt   # Dependencias backend
  └── README.md
-
 ```
