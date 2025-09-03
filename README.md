@@ -28,7 +28,7 @@ Aplicación web para la gestión y visualización de materiales eléctricos, des
 
 ```
 
-##Ejecución
+# Ejecución
 
 Iniciar servidor de desarrollo (frontend):
 
@@ -38,7 +38,7 @@ Iniciar servidor de desarrollo (frontend):
 
 ```
 
-📂 Estructura
+# 📂 Estructura
 ```
 
 JLF/
